@@ -8,7 +8,7 @@ const ucsbDiningCommonsMenuItemFixtures = {
   threeUcsbDiningCommonsMenuItems: [
     {
       id: 1,
-      diningCommonsCode: "Portola",
+      diningCommonsCode: "DLG",
       name: "Pizza",
       station: "Pizza Station",
     },
