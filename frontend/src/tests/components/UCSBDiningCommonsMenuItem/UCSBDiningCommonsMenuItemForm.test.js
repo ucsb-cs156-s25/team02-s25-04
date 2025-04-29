@@ -1,9 +1,4 @@
-import {
-  render,
-  waitFor,
-  fireEvent,
-  screen,
-} from "@testing-library/react";
+import { render, waitFor, fireEvent, screen } from "@testing-library/react";
 import UCSBDiningCommonsMenuItemForm from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemForm";
 import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -38,9 +33,9 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
 
     await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
-    expect(
-      screen.getByTestId("UCSBDiningCommonsMenuItemForm-id"),
-    ).toHaveValue("1");
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-id")).toHaveValue(
+      "1"
+    );
 
     expect(
       screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode"),
@@ -111,12 +106,8 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     expect(
       screen.queryByText(/Dining Commons Code is required./),
     ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(/Name is required./),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByText(/Station is required./),
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/Name is required./)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Station is required./)).not.toBeInTheDocument();
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
