@@ -34,7 +34,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
     await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
     expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-id")).toHaveValue(
-      "1"
+      "1",
     );
 
     expect(
