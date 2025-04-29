@@ -34,7 +34,7 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
 
     // Verify all fields are correctly populated
     expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-id")).toHaveValue("1");
-    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode")).toHaveValue("ortega");
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode")).toHaveValue("Portola");
     expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-name")).toHaveValue("Pizza");
     expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-station")).toHaveValue("Pizza Station");
   });
