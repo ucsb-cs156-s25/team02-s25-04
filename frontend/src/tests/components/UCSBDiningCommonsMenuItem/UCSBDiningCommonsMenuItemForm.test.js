@@ -23,12 +23,20 @@ describe("UCSBDiningCommonsMenuItemForm tests", () => {
   test("renders correctly when passing in a UCSBDiningCommonsMenuItem", async () => {
     render(
       <Router>
-        <UCSBDiningCommonsMenuItemForm initialContents={ucsbDiningCommonsMenuItemFixtures.oneUcsbDiningCommonsMenuItem} />
+        <UCSBDiningCommonsMenuItemForm
+          initialContents={ucsbDiningCommonsMenuItemFixtures.oneUcsbDiningCommonsMenuItem}
+        />
       </Router>,
     );
-    await screen.findByTestId(/UCSBDiningCommonsMenuItemForm-id/);
-    expect(screen.getByText(/Id/)).toBeInTheDocument();
-    expect(screen.getByTestId(/UCSBDiningCommonsMenuItemForm-id/)).toHaveValue("1");
+
+    // Wait for the form to render
+    await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
+
+    // Verify all fields are correctly populated
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-id")).toHaveValue("1");
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode")).toHaveValue("ortega");
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-name")).toHaveValue("Pizza");
+    expect(screen.getByTestId("UCSBDiningCommonsMenuItemForm-station")).toHaveValue("Pizza Station");
   });
 
   test("Correct Error messages on missing input", async () => {
