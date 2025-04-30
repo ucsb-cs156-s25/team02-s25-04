@@ -17,8 +17,18 @@ jest.mock("react-router-dom", () => ({
 describe("UCSBOrganizationTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Org Code", "Org Translation Short", "Org Translation", "Inactive"];
-  const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
+  const expectedHeaders = [
+    "Org Code",
+    "Org Translation Short",
+    "Org Translation",
+    "Inactive",
+  ];
+  const expectedFields = [
+    "orgCode",
+    "orgTranslationShort",
+    "orgTranslation",
+    "inactive",
+  ];
   const testId = "UCSBOrganizationTable";
 
   test("renders empty table correctly", () => {
@@ -29,7 +39,10 @@ describe("UCSBOrganizationTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable ucsbOrganizations={[]} currentUser={currentUser} />
+          <UCSBOrganizationTable
+            ucsbOrganizations={[]}
+            currentUser={currentUser}
+          />
         </MemoryRouter>
       </QueryClientProvider>,
     );
@@ -75,16 +88,16 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent(
-      "ZPR",
-    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+    ).toHaveTextContent("ZPR");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
     ).toHaveTextContent("ZETA PHI RHO");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent(
-      "SKY",
-    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
+    ).toHaveTextContent("SKY");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`),
     ).toHaveTextContent("SKYDIVING CLUB AT UCSB");
@@ -129,16 +142,16 @@ describe("UCSBOrganizationTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent(
-      "ZPR",
-    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-orgCode`),
+    ).toHaveTextContent("ZPR");
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`),
     ).toHaveTextContent("ZETA PHI RHO");
 
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent(
-      "SKY",
-    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-orgCode`),
+    ).toHaveTextContent("SKY");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-orgTranslation`),
     ).toHaveTextContent("SKYDIVING CLUB AT UCSB");
@@ -181,7 +194,9 @@ describe("UCSBOrganizationTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/UCSBOrganizations/edit/ZPR"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/UCSBOrganizations/edit/ZPR",
+      ),
     );
   });
 
