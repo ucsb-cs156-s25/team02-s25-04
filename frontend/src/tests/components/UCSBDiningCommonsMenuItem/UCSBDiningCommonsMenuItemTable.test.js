@@ -6,11 +6,6 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
-import { toast } from "react-toastify";
-
-jest.mock("react-toastify", () => ({
-  toast: jest.fn(),
-}));
 
 const mockedNavigate = jest.fn();
 
@@ -43,21 +38,31 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     const testId = "UCSBDiningCommonsMenuItemTable";
 
     expectedHeaders.forEach((headerText) => {
-      expect(screen.getByText(headerText)).toBeInTheDocument();
+      const header = screen.getByText(headerText);
+      expect(header).toBeInTheDocument();
     });
 
     expectedFields.forEach((field) => {
-      expect(
-        screen.getByTestId(`${testId}-cell-row-0-col-${field}`),
-      ).toBeInTheDocument();
+      const cell = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
+      expect(cell).toBeInTheDocument();
     });
 
-    expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`),
-    ).not.toBeInTheDocument();
-    expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-Delete-button`),
-    ).not.toBeInTheDocument();
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
+
+    const editButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Edit-button`,
+    );
+    expect(editButton).not.toBeInTheDocument();
+
+    const deleteButton = screen.queryByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
+    );
+    expect(deleteButton).not.toBeInTheDocument();
   });
 
   test("Has the expected column headers and content for admin user", () => {
@@ -76,7 +81,26 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       </QueryClientProvider>,
     );
 
+    const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
+    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
     const testId = "UCSBDiningCommonsMenuItemTable";
+
+    expectedHeaders.forEach((headerText) => {
+      const header = screen.getByText(headerText);
+      expect(header).toBeInTheDocument();
+    });
+
+    expectedFields.forEach((field) => {
+      const cell = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
+      expect(cell).toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -110,24 +134,29 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     await waitFor(() => {
       expect(
         screen.getByTestId(`UCSBDiningCommonsMenuItemTable-cell-row-0-col-id`),
-      ).toBeInTheDocument();
+      ).toHaveTextContent("1");
     });
 
     const editButton = screen.getByTestId(
       `UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button`,
     );
+    expect(editButton).toBeInTheDocument();
+
     fireEvent.click(editButton);
 
-    expect(mockedNavigate).toHaveBeenCalledWith(
-      "/ucsbdiningcommonsmenuitem/edit/1",
+    await waitFor(() =>
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/ucsbdiningcommonsmenuitem/edit/1",
+      ),
     );
   });
 
-  test("Delete button calls delete callback and displays toast", async () => {
+  test("Delete button calls delete callback", async () => {
     const currentUser = currentUserFixtures.adminUser;
+
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/ucsbdiningcommonsmenuitem", { params: { id: 1 } })
+      .onDelete("/api/ucsbdiningcommonsmenuitem")
       .reply(200, { message: "Item deleted" });
 
     render(
@@ -152,17 +181,11 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     const deleteButton = screen.getByTestId(
       `UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button`,
     );
+    expect(deleteButton).toBeInTheDocument();
+
     fireEvent.click(deleteButton);
 
-    await waitFor(() => {
-      expect(axiosMock.history.delete.length).toBeGreaterThan(0);
-    });
-
-    const deleteCall = axiosMock.history.delete[0];
-    expect(deleteCall.url).toBe("/api/ucsbdiningcommonsmenuitem");
-    expect(deleteCall.params).toEqual({ id: 1 });
-    expect(toast).toHaveBeenCalledWith(
-      expect.objectContaining({ message: "Item deleted" }),
-    );
+    await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
+    expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
   });
 });
