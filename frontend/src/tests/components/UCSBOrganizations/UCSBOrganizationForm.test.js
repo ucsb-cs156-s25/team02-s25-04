@@ -17,6 +17,7 @@ describe("UCSBOrganizationForm tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = [
+    "Org Code",
     "Org Translation Short",
     "Org Translation",
     "Inactive",
@@ -45,7 +46,7 @@ describe("UCSBOrganizationForm tests", () => {
       <QueryClientProvider client={queryClient}>
         <Router>
           <UCSBOrganizationForm
-            initialContents={ucsbOrganizationFixtures.oneUcsbOrganization}
+            initialContents={ucsbOrganizationFixtures.oneUcsbOrganization[0]}
           />
         </Router>
       </QueryClientProvider>,
@@ -92,14 +93,30 @@ describe("UCSBOrganizationForm tests", () => {
     fireEvent.click(submitButton);
 
     await screen.findByText(/Org Translation is required/);
+    expect(screen.getByText(/Org Translation is required/)).toBeInTheDocument();
+
+    await screen.findByText(/Org Translation Short is required/);
     expect(
       screen.getByText(/Org Translation Short is required/),
     ).toBeInTheDocument();
+
+    await screen.findByText(/Org Code is required/);
+    expect(screen.getByText(/Org Code is required/)).toBeInTheDocument();
 
     const orgTranslationShortInput = screen.getByTestId(
       `${testId}-orgTranslationShort`,
     );
     fireEvent.change(orgTranslationShortInput, {
+      target: { value: "a".repeat(31) },
+    });
+    fireEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+    });
+
+    const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
+    fireEvent.change(orgCodeInput, {
       target: { value: "a".repeat(31) },
     });
     fireEvent.click(submitButton);
