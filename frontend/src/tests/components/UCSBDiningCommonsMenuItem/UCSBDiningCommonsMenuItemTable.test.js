@@ -251,5 +251,6 @@ describe("MenuItemReviewTable tests", () => {
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
+    expect(axiosMock.history.delete[0].url).toEqual("/api/ucsbdiningcommonsmenuitem");
   });
 });

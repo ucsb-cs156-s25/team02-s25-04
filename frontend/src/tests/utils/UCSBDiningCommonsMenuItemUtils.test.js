@@ -25,9 +25,7 @@ describe("UCSBDiningCommonsMenuItemUtils", () => {
 
       // assert
       expect(mockToast).toHaveBeenCalledWith("abc");
-      expect(console.log).toHaveBeenCalled();
-      const message = console.log.mock.calls[0][0];
-      expect(message).toMatch("abc");
+      expect(console.log).toHaveBeenCalledWith("abc");
 
       restoreConsole();
     });
