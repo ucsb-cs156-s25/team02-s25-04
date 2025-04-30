@@ -48,7 +48,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     });
   });
 
-  test("Has expected headers and content for admin user", () => {
+  test("Has expected headers, content, and buttons for admin user", () => {
     const currentUser = currentUserFixtures.adminUser;
 
     render(
@@ -74,6 +74,20 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       ).toBeInTheDocument();
     });
 
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("de-la-guerra");
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
+    ).toHaveTextContent("portola");
+
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
     );
@@ -85,6 +99,50 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     );
     expect(deleteButton).toBeInTheDocument();
     expect(deleteButton).toHaveClass("btn-danger");
+  });
+
+  test("Has expected headers and content for ordinary user", () => {
+    const currentUser = currentUserFixtures.userOnly;
+
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={
+              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
+            }
+            currentUser={currentUser}
+          />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    expectedHeaders.forEach((headerText) => {
+      expect(screen.getByText(headerText)).toBeInTheDocument();
+    });
+
+    expectedFields.forEach((field) => {
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-${field}`),
+      ).toBeInTheDocument();
+    });
+
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("de-la-guerra");
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
+      "2",
+    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-1-col-diningCommonsCode`),
+    ).toHaveTextContent("portola");
+
+    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
   });
 
   test("Edit button navigates to the edit page", async () => {
@@ -102,6 +160,13 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
+
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("1");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("de-la-guerra");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -138,9 +203,18 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const deleteButton = await screen.findByTestId(
+    expect(
+      await screen.findByTestId(`${testId}-cell-row-0-col-id`),
+    ).toHaveTextContent("1");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("de-la-guerra");
+
+    const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
     );
+    expect(deleteButton).toBeInTheDocument();
+
     fireEvent.click(deleteButton);
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
