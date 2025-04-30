@@ -162,8 +162,9 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
         "/api/ucsbdiningcommonsmenuitem",
       );
       expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
-      expect(toast).toHaveBeenCalledWith(expect.objectContaining({ message: "Item deleted" }));
-
+      expect(toast).toHaveBeenCalledWith(
+        expect.objectContaining({ message: "Item deleted" }),
+      );
     });
   });
 });
