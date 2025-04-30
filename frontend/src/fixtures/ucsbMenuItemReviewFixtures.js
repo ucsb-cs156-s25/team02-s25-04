@@ -1,20 +1,20 @@
 const ucsbMenuItemReviewFixtures = {
   oneReview: {
     id: 1,
-    itemId: 10,
-    reviewerEmail: "user@ucsb.edu",
+    itemId: 42,
+    reviewerEmail: "student@ucsb.edu",
     stars: 4,
-    dateReviewed: "2022-01-02T12:00:00",
-    comments: "bark",
+    dateReviewed: "2023-05-15T12:00",
+    comments: "Very tasty!",
   },
   threeReviews: [
     {
       id: 1,
-      itemId: 10,
-      reviewerEmail: "user@ucsb.edu",
+      itemId: 42,
+      reviewerEmail: "student@ucsb.edu",
       stars: 4,
-      dateReviewed: "2022-01-02T12:00:00",
-      comments: "bark",
+      dateReviewed: "2023-05-15T12:00",
+      comments: "Very tasty!",
     },
     {
       id: 2,
