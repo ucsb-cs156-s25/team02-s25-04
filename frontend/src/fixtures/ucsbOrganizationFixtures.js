@@ -1,4 +1,4 @@
-const restaurantFixtures = {
+const ucsbOrganizationFixtures = {
   oneUcsbOrganization: [
     {
       orgCode: "ZPR",
@@ -30,4 +30,4 @@ const restaurantFixtures = {
   ],
 };
 
-export { restaurantFixtures };
+export { ucsbOrganizationFixtures };
