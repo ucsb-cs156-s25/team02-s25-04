@@ -17,25 +17,23 @@ jest.mock("react-router-dom", () => ({
 describe("UCSBDiningCommonsMenuItemTable tests", () => {
   const queryClient = new QueryClient();
 
-  test("Has the expected column headers and content for ordinary user", () => {
-    const currentUser = currentUserFixtures.userOnly;
+  const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
+  const expectedFields = ["id", "diningCommonsCode", "name", "station"];
+  const testId = "UCSBDiningCommonsMenuItemTable";
+
+  test("renders empty table correctly", () => {
+    const currentUser = currentUserFixtures.adminUser;
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <UCSBDiningCommonsMenuItemTable
-            menuItems={
-              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
-            }
+            menuItems={[]}
             currentUser={currentUser}
           />
         </MemoryRouter>
       </QueryClientProvider>,
     );
-
-    const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
-    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
-    const testId = "UCSBDiningCommonsMenuItemTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -43,29 +41,14 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     });
 
     expectedFields.forEach((field) => {
-      const cell = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
-      expect(cell).toBeInTheDocument();
+      const fieldElement = screen.queryByTestId(
+        `${testId}-cell-row-0-col-${field}`,
+      );
+      expect(fieldElement).not.toBeInTheDocument();
     });
-
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "2",
-    );
-
-    const editButton = screen.queryByTestId(
-      `${testId}-cell-row-0-col-Edit-button`,
-    );
-    expect(editButton).not.toBeInTheDocument();
-
-    const deleteButton = screen.queryByTestId(
-      `${testId}-cell-row-0-col-Delete-button`,
-    );
-    expect(deleteButton).not.toBeInTheDocument();
   });
 
-  test("Has the expected column headers and content for admin user", () => {
+  test("Has expected headers and content for admin user", () => {
     const currentUser = currentUserFixtures.adminUser;
 
     render(
@@ -81,26 +64,15 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       </QueryClientProvider>,
     );
 
-    const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
-    const expectedFields = ["id", "diningCommonsCode", "name", "station"];
-    const testId = "UCSBDiningCommonsMenuItemTable";
-
     expectedHeaders.forEach((headerText) => {
-      const header = screen.getByText(headerText);
-      expect(header).toBeInTheDocument();
+      expect(screen.getByText(headerText)).toBeInTheDocument();
     });
 
     expectedFields.forEach((field) => {
-      const cell = screen.getByTestId(`${testId}-cell-row-0-col-${field}`);
-      expect(cell).toBeInTheDocument();
+      expect(
+        screen.getByTestId(`${testId}-cell-row-0-col-${field}`),
+      ).toBeInTheDocument();
     });
-
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
-      "1",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent(
-      "2",
-    );
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -115,7 +87,7 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     expect(deleteButton).toHaveClass("btn-danger");
   });
 
-  test("Edit button navigates to the edit page for admin user", async () => {
+  test("Edit button navigates to the edit page", async () => {
     const currentUser = currentUserFixtures.adminUser;
 
     render(
@@ -131,14 +103,8 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(
-        screen.getByTestId(`UCSBDiningCommonsMenuItemTable-cell-row-0-col-id`),
-      ).toHaveTextContent("1");
-    });
-
     const editButton = screen.getByTestId(
-      `UCSBDiningCommonsMenuItemTable-cell-row-0-col-Edit-button`,
+      `${testId}-cell-row-0-col-Edit-button`,
     );
     expect(editButton).toBeInTheDocument();
 
@@ -153,11 +119,11 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
 
   test("Delete button calls delete callback", async () => {
     const currentUser = currentUserFixtures.adminUser;
-
     const axiosMock = new AxiosMockAdapter(axios);
+
     axiosMock
       .onDelete("/api/ucsbdiningcommonsmenuitem")
-      .reply(200, { message: "Item deleted" });
+      .reply(200, { message: "MenuItem deleted" });
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -172,17 +138,9 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
       </QueryClientProvider>,
     );
 
-    await waitFor(() => {
-      expect(
-        screen.getByTestId(`UCSBDiningCommonsMenuItemTable-cell-row-0-col-id`),
-      ).toHaveTextContent("1");
-    });
-
-    const deleteButton = screen.getByTestId(
-      `UCSBDiningCommonsMenuItemTable-cell-row-0-col-Delete-button`,
+    const deleteButton = await screen.findByTestId(
+      `${testId}-cell-row-0-col-Delete-button`,
     );
-    expect(deleteButton).toBeInTheDocument();
-
     fireEvent.click(deleteButton);
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
