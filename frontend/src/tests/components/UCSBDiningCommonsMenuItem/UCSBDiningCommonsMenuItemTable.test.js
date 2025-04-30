@@ -161,6 +161,6 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     const deleteCall = axiosMock.history.delete[0];
     expect(deleteCall.url).toBe("/api/ucsbdiningcommonsmenuitem");
     expect(deleteCall.params).toEqual({ id: 1 });
-    expect(toast).toHaveBeenCalledWith(expect.any(String));
+    expect(toast).toHaveBeenCalledWith(expect.objectContaining({ message: "Item deleted" }));
   });
 });
