@@ -1,7 +1,5 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import {
-  ucsbDiningCommonsMenuItemFixtures,
-} from "fixtures/ucsbDiningCommonsMenuItemFixtures";
+import { ucsbDiningCommonsMenuItemFixtures } from "fixtures/ucsbDiningCommonsMenuItemFixtures";
 import UCSBDiningCommonsMenuItemTable from "main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
@@ -19,18 +17,8 @@ jest.mock("react-router-dom", () => ({
 describe("MenuItemReviewTable tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = [
-    "id",
-    "Dining Commons Code",
-    "Name",
-    "Station",
-  ];
-  const expectedFields = [
-    "id",
-    "diningCommonsCode",
-    "name",
-    "station",
-  ];
+  const expectedHeaders = ["id", "Dining Commons Code", "Name", "Station"];
+  const expectedFields = ["id", "diningCommonsCode", "name", "station"];
   const testId = "UCSBDiningCommonsMenuItemTable";
 
   test("renders empty table correctly", () => {
@@ -41,8 +29,8 @@ describe("MenuItemReviewTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBDiningCommonsMenuItemTable 
-            menuItems ={[]}
+          <UCSBDiningCommonsMenuItemTable
+            menuItems={[]}
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -72,7 +60,9 @@ describe("MenuItemReviewTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <UCSBDiningCommonsMenuItemTable
-            menuItems={ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems}
+            menuItems={
+              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -93,15 +83,15 @@ describe("MenuItemReviewTable tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
       "1",
     );
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`)).toHaveTextContent(
-      "DLG",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-name`)).toHaveTextContent(
-      "Pizza",
-    );
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-station`)).toHaveTextContent(
-      "Pizza Station",
-    );
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-diningCommonsCode`),
+    ).toHaveTextContent("DLG");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-name`),
+    ).toHaveTextContent("Pizza");
+    expect(
+      screen.getByTestId(`${testId}-cell-row-0-col-station`),
+    ).toHaveTextContent("Pizza Station");
 
     const editButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Edit-button`,
@@ -125,7 +115,9 @@ describe("MenuItemReviewTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <UCSBDiningCommonsMenuItemTable
-            menuItems={ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems}
+            menuItems={
+              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -169,7 +161,9 @@ describe("MenuItemReviewTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <UCSBDiningCommonsMenuItemTable
-            menuItems={ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems}
+            menuItems={
+              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -200,7 +194,9 @@ describe("MenuItemReviewTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/ucsbdiningcommonsmenuitem/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith(
+        "/ucsbdiningcommonsmenuitem/edit/1",
+      ),
     );
   });
 
@@ -218,7 +214,9 @@ describe("MenuItemReviewTable tests", () => {
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
           <UCSBDiningCommonsMenuItemTable
-            menuItems={ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems}
+            menuItems={
+              ucsbDiningCommonsMenuItemFixtures.threeUcsbDiningCommonsMenuItems
+            }
             currentUser={currentUser}
           />
         </MemoryRouter>
@@ -251,6 +249,8 @@ describe("MenuItemReviewTable tests", () => {
 
     await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
     expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
-    expect(axiosMock.history.delete[0].url).toEqual("/api/ucsbdiningcommonsmenuitem");
+    expect(axiosMock.history.delete[0].url).toEqual(
+      "/api/ucsbdiningcommonsmenuitem",
+    );
   });
 });
