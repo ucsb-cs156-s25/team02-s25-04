@@ -6,6 +6,11 @@ import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
 import axios from "axios";
 import AxiosMockAdapter from "axios-mock-adapter";
+import { toast } from "react-toastify";
+
+jest.mock("react-toastify", () => ({
+  toast: jest.fn(),
+}));
 
 const mockedNavigate = jest.fn();
 
@@ -120,11 +125,11 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     );
   });
 
-  test("Delete button calls delete callback", async () => {
+  test("Delete button calls delete callback and displays toast", async () => {
     const currentUser = currentUserFixtures.adminUser;
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/ucsbdiningcommonsmenuitem")
+      .onDelete("/api/ucsbdiningcommonsmenuitem", { params: { id: 1 } })
       .reply(200, { message: "Item deleted" });
 
     render(
@@ -151,7 +156,13 @@ describe("UCSBDiningCommonsMenuItemTable tests", () => {
     );
     fireEvent.click(deleteButton);
 
-    await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
-    expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
+    await waitFor(() => {
+      expect(axiosMock.history.delete.length).toBe(1);
+      expect(axiosMock.history.delete[0].url).toBe(
+        "/api/ucsbdiningcommonsmenuitem",
+      );
+      expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
+      expect(toast).toHaveBeenCalledWith("Item deleted");
+    });
   });
 });
