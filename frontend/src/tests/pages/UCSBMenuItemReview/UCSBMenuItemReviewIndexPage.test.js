@@ -103,7 +103,8 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("delete review as admin shows toast", async () => {
+  test("WHY WONT YOU WORK", async () => {
+    // arrange
     setupAdminUser();
     const queryClient = new QueryClient();
     axiosMock
@@ -113,6 +114,7 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
       .onDelete("/api/ucsbmenuitemreview")
       .reply(200, "UCSBMenuItemReview with id 1 was deleted");
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -120,6 +122,25 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
+    // test("what happens when you click delete, admin", async () => {
+    //   // arrange
+    //   setupAdminUser();
+    //   const queryClient = new QueryClient();
+    //   axiosMock
+    //     .onGet("/api/ucsbmenuitemreview/all")
+    //     .reply(200, ucsbMenuItemReviewFixtures.threeReviews);
+    //   axiosMock
+    //     .onDelete("/api/ucsbmenuitemreview")
+    //     .reply(200, "UCSBMenuItemReview with id 1 was deleted");
+
+    //   // act
+    //   render(
+    //     <QueryClientProvider client={queryClient}>
+    //       <MemoryRouter>
+    //         <UCSBMenuItemReviewIndexPage />
+    //       </MemoryRouter>
+    //     </QueryClientProvider>,
+    //   );
 
     await waitFor(() => {
       expect(
