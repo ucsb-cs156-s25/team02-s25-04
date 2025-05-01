@@ -128,7 +128,7 @@ function ArticlesForm({
           })}
         />
         <Form.Control.Feedback type="invalid">
-            {errors.dateAdded?.message}
+          {errors.dateAdded?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
