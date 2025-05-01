@@ -3,10 +3,10 @@ import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
-import UCSBMenuItemReviewCreatePage from "main/pages/UCSBMenuItemReviews/UCSBMenuItemReviewCreatePage";
+import UCSBMenuItemReviewCreatePage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewCreatePage";
 
 export default {
-  title: "pages/UCSBMenuItemReviews/UCSBMenuItemReviewCreatePage",
+  title: "pages/UCSBMenuItemReview/UCSBMenuItemReviewCreatePage",
   component: UCSBMenuItemReviewCreatePage,
 };
 
