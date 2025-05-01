@@ -117,12 +117,12 @@ describe("UCSBOrganizationForm tests", () => {
 
     const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
     fireEvent.change(orgCodeInput, {
-      target: { value: "a".repeat(31) },
+      target: { value: "a".repeat(11) },
     });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Max length 30 characters/)).toBeInTheDocument();
+      expect(screen.getByText(/Max length 10 characters/)).toBeInTheDocument();
     });
   });
 });
