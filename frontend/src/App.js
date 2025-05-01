@@ -19,6 +19,10 @@ import UCSBDiningCommonsMenuItemIndexPage from "main/pages/UCSBDiningCommonsMenu
 import UCSBDiningCommonsMenuItemCreatePage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemCreatePage";
 import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
 
+import UCSBMenuItemReviewIndexPage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewIndexPage";
+import UCSBMenuItemReviewCreatePage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewCreatePage";
+import UCSBMenuItemReviewEditPage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewEditPage";
+
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -105,7 +109,7 @@ function App() {
             <Route
               exact
               path="/ucsbdiningcommonsmenuitem"
-              element={<UCSBDiningCommonsMenuItemIndexPage />}
+              element={<PlaceholderIndexPage />}
             />
           </>
         )}
@@ -114,12 +118,35 @@ function App() {
             <Route
               exact
               path="/ucsbdiningcommonsmenuitem/edit/:id"
-              element={<UCSBDiningCommonsMenuItemEditPage />}
+              element={<PlaceholderEditPage />}
             />
             <Route
               exact
               path="/ucsbdiningcommonsmenuitem/create"
-              element={<UCSBDiningCommonsMenuItemCreatePage />}
+              element={<PlaceholderCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/ucsbmenuitemreview"
+              element={<UCSBMenuItemReviewIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/ucsbmenuitemreview/edit/:id"
+              element={<UCSBMenuItemReviewEditPage />}
+            />
+            <Route
+              exact
+              path="/ucsbmenuitemreview/create"
+              element={<UCSBMenuItemReviewCreatePage />}
             />
           </>
         )}
