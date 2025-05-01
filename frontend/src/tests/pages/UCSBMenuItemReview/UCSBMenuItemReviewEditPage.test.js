@@ -42,9 +42,15 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
     beforeEach(() => {
       axiosMock.reset();
       axiosMock.resetHistory();
-      axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
-      axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsbmenuitemreview", { params: { id: 5 } }).timeout();
+      axiosMock
+        .onGet("/api/currentUser")
+        .reply(200, apiCurrentUserFixtures.userOnly);
+      axiosMock
+        .onGet("/api/systemInfo")
+        .reply(200, systemInfoFixtures.showingNeither);
+      axiosMock
+        .onGet("/api/ucsbmenuitemreview", { params: { id: 5 } })
+        .timeout();
     });
 
     const queryClient = new QueryClient();
@@ -55,11 +61,13 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
           <MemoryRouter>
             <UCSBMenuItemReviewEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByText("Edit UCSBMenuItemReview");
-      expect(screen.queryByTestId("UCSBMenuItemReviewForm-reviewerEmail")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("UCSBMenuItemReviewForm-reviewerEmail"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -70,17 +78,23 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
     beforeEach(() => {
       axiosMock.reset();
       axiosMock.resetHistory();
-      axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
-      axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
+      axiosMock
+        .onGet("/api/currentUser")
+        .reply(200, apiCurrentUserFixtures.userOnly);
+      axiosMock
+        .onGet("/api/systemInfo")
+        .reply(200, systemInfoFixtures.showingNeither);
 
-      axiosMock.onGet("/api/ucsbmenuitemreview", { params: { id: 5 } }).reply(200, {
-        id: 5,
-        reviewerEmail: "test@ucsb.edu",
-        stars: 4,
-        dateReviewed: "2023-04-01T12:00",
-        itemId: 10,
-        comments: "Great item!",
-      });
+      axiosMock
+        .onGet("/api/ucsbmenuitemreview", { params: { id: 5 } })
+        .reply(200, {
+          id: 5,
+          reviewerEmail: "test@ucsb.edu",
+          stars: 4,
+          dateReviewed: "2023-04-01T12:00",
+          itemId: 10,
+          comments: "Great item!",
+        });
 
       axiosMock.onPut("/api/ucsbmenuitemreview").reply(200, {
         id: 5,
@@ -99,7 +113,7 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
           <MemoryRouter>
             <UCSBMenuItemReviewEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByTestId("UCSBMenuItemReviewForm-reviewerEmail");
@@ -111,17 +125,25 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
           <MemoryRouter>
             <UCSBMenuItemReviewEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByTestId("UCSBMenuItemReviewForm-reviewerEmail");
 
       expect(screen.getByTestId("UCSBMenuItemReviewForm-id")).toHaveValue("5");
-      expect(screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail")).toHaveValue("test@ucsb.edu");
+      expect(
+        screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"),
+      ).toHaveValue("test@ucsb.edu");
       expect(screen.getByTestId("UCSBMenuItemReviewForm-stars")).toHaveValue(4);
-      expect(screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed")).toHaveValue("2023-04-01T12:00");
-      expect(screen.getByTestId("UCSBMenuItemReviewForm-itemId")).toHaveValue(10);
-      expect(screen.getByTestId("UCSBMenuItemReviewForm-comments")).toHaveValue("Great item!");
+      expect(
+        screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"),
+      ).toHaveValue("2023-04-01T12:00");
+      expect(screen.getByTestId("UCSBMenuItemReviewForm-itemId")).toHaveValue(
+        10,
+      );
+      expect(screen.getByTestId("UCSBMenuItemReviewForm-comments")).toHaveValue(
+        "Great item!",
+      );
     });
 
     test("Changes when you click Update", async () => {
@@ -130,33 +152,39 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
           <MemoryRouter>
             <UCSBMenuItemReviewEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
-    
+
       await screen.findByTestId("UCSBMenuItemReviewForm-reviewerEmail");
-    
-      fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"), {
-        target: { value: "updated@ucsb.edu" },
-      });
+
+      fireEvent.change(
+        screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"),
+        {
+          target: { value: "updated@ucsb.edu" },
+        },
+      );
       fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-stars"), {
         target: { value: "5" }, // string value
       });
-      fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"), {
-        target: { value: "2023-05-01T08:30" },
-      });
+      fireEvent.change(
+        screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"),
+        {
+          target: { value: "2023-05-01T08:30" },
+        },
+      );
       fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-itemId"), {
         target: { value: "11" }, // string value
       });
       fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-comments"), {
         target: { value: "Updated review" },
       });
-    
+
       fireEvent.click(screen.getByTestId("UCSBMenuItemReviewForm-submit"));
-    
+
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith("Review Updated - id: 5");
       expect(mockNavigate).toBeCalledWith({ to: "/ucsbmenuitemreview" });
-    
+
       expect(axiosMock.history.put.length).toBe(1);
       expect(axiosMock.history.put[0].params).toEqual({ id: 5 });
       expect(axiosMock.history.put[0].data).toBe(
@@ -167,9 +195,8 @@ describe("UCSBMenuItemReviewEditPage tests", () => {
           dateReviewed: "2023-05-01T08:30",
           itemId: "11", // string
           comments: "Updated review",
-        })
+        }),
       );
     });
-    
   });
 });

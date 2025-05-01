@@ -47,12 +47,14 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
   };
 
   test("renders three reviews correctly for regular user", async () => {
+    // arrange
     setupUserOnly();
     const queryClient = new QueryClient();
     axiosMock
       .onGet("/api/ucsbmenuitemreview/all")
       .reply(200, ucsbMenuItemReviewFixtures.threeReviews);
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -61,6 +63,7 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
@@ -72,14 +75,21 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
     expect(screen.getByTestId(`${testId}-cell-row-2-col-id`)).toHaveTextContent(
       "3",
     );
+
+    // assert that the Create button is not present when user isn't an admin
+    expect(
+      screen.queryByText(/Create UCSBMenuItemReview/),
+    ).not.toBeInTheDocument();
   });
 
-  test("renders empty table when backend unavailable", async () => {
+  test("renders empty table when backend unavailable, user only", async () => {
+    // arrange
     setupUserOnly();
     const queryClient = new QueryClient();
     axiosMock.onGet("/api/ucsbmenuitemreview/all").timeout();
     const restoreConsole = mockConsole();
 
+    // act
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
@@ -88,6 +98,7 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
       </QueryClientProvider>,
     );
 
+    // assert
     await waitFor(() => {
       expect(axiosMock.history.get.length).toBeGreaterThanOrEqual(1);
     });
@@ -103,7 +114,31 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
     ).not.toBeInTheDocument();
   });
 
-  test("WHY WONT YOU WORK", async () => {
+  test("renders with Create Button for admin user", async () => {
+    // arrange
+    setupAdminUser();
+    const queryClient = new QueryClient();
+    axiosMock.onGet("/api/ucsbmenuitemreview/all").reply(200, []);
+
+    // act
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <UCSBMenuItemReviewIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+
+    // assert
+    await waitFor(() => {
+      expect(screen.getByText(/Create UCSBMenuItemReview/)).toBeInTheDocument();
+    });
+    const button = screen.getByText(/Create UCSBMenuItemReview/);
+    expect(button).toHaveAttribute("href", "/ucsbmenuitemreview/create");
+    expect(button).toHaveAttribute("style", "float: right;");
+  });
+
+  test("what happens when you click delete, admin", async () => {
     // arrange
     setupAdminUser();
     const queryClient = new QueryClient();
@@ -122,37 +157,27 @@ describe("UCSBMenuItemReviewIndexPage tests", () => {
         </MemoryRouter>
       </QueryClientProvider>,
     );
-    // test("what happens when you click delete, admin", async () => {
-    //   // arrange
-    //   setupAdminUser();
-    //   const queryClient = new QueryClient();
-    //   axiosMock
-    //     .onGet("/api/ucsbmenuitemreview/all")
-    //     .reply(200, ucsbMenuItemReviewFixtures.threeReviews);
-    //   axiosMock
-    //     .onDelete("/api/ucsbmenuitemreview")
-    //     .reply(200, "UCSBMenuItemReview with id 1 was deleted");
 
-    //   // act
-    //   render(
-    //     <QueryClientProvider client={queryClient}>
-    //       <MemoryRouter>
-    //         <UCSBMenuItemReviewIndexPage />
-    //       </MemoryRouter>
-    //     </QueryClientProvider>,
-    //   );
-
+    // assert
     await waitFor(() => {
       expect(
         screen.getByTestId(`${testId}-cell-row-0-col-id`),
       ).toBeInTheDocument();
     });
 
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent(
+      "1",
+    );
+
     const deleteButton = screen.getByTestId(
       `${testId}-cell-row-0-col-Delete-button`,
     );
+    expect(deleteButton).toBeInTheDocument();
+
+    // act
     fireEvent.click(deleteButton);
 
+    // assert
     await waitFor(() => {
       expect(mockToast).toBeCalledWith(
         "UCSBMenuItemReview with id 1 was deleted",
