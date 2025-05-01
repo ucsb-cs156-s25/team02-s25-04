@@ -71,7 +71,7 @@ describe("UCSBMenuItemReviewCreatePage tests", () => {
     };
 
     axiosMock
-      .onPost("/api/ucsbdiningcommonsmenuitemreview/post")
+      .onPost("/api/ucsbmenuitemreview/post")
       .reply(202, review);
 
     render(
