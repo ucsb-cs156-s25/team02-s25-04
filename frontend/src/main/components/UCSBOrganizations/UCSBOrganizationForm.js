@@ -37,7 +37,7 @@ function UCSBOrganizationForm({
                 message: "Max length 10 characters",
               },
             })}
-            defaultValue={initialContents?.orgCode ?? ""}
+            //defaultValue={initialContents?.orgCode ?? ""}
             disabled={Boolean(initialContents)}
           />
           <Form.Control.Feedback type="invalid">
@@ -91,10 +91,7 @@ function UCSBOrganizationForm({
           label="Inactive"
           data-testid={`${testIdPrefix}-inactive`}
           {...register("inactive")}
-          defaultChecked={initialContents?.inactive ?? false}
-          // If you ever want validation feedback on a checkbox:
-          // isInvalid={Boolean(errors.inactive)}
-          // feedback={errors.inactive?.message}
+          //defaultChecked={initialContents?.inactive ?? false}
         />
       </Form.Group>
 
