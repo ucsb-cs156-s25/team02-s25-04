@@ -86,10 +86,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.explanation)}
           {...register("explanation", {
             required: "Explanation is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -105,10 +101,6 @@ function ArticlesForm({
           isInvalid={Boolean(errors.email)}
           {...register("email", {
             required: "Email is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
           })}
         />
         <Form.Control.Feedback type="invalid">
@@ -132,9 +124,7 @@ function ArticlesForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" >
-        {buttonLabel}
-      </Button>
+      <Button type="submit">{buttonLabel}</Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
