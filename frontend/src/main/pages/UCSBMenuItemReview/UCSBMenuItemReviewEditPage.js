@@ -14,7 +14,7 @@ export default function UCSBMenuItemReviewEditPage() {
 // import React from "react";
 // import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
 // import { useParams, Navigate } from "react-router-dom";
-// import UCSBMenuItemReviewForm from "main/components/UCSBMenuItemReviews/UCSBMenuItemReviewForm";
+// import UCSBMenuItemReviewForm from "main/components/UCSBMenuItemReview/UCSBMenuItemReviewForm";
 // import { useBackend, useBackendMutation } from "main/utils/useBackend";
 // import { toast } from "react-toastify";
 
