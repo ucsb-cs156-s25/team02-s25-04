@@ -41,11 +41,10 @@ describe("UCSBOrganizationForm tests", () => {
     });
     const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
     expect(orgCodeInput).toHaveValue(""); //checking defaults
-    expect(orgCodeInput).not.toBeDisabled();      
+    expect(orgCodeInput).not.toBeDisabled();
 
     const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
-    expect(inactiveCheckbox).not.toBeChecked();   
-      
+    expect(inactiveCheckbox).not.toBeChecked();
   });
 
   test("renders correctly when passing in initialContents", async () => {
@@ -75,7 +74,6 @@ describe("UCSBOrganizationForm tests", () => {
 
     const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
     expect(inactiveCheckbox).not.toBeChecked();
-
   });
 
   test("checkbox test", async () => {
@@ -105,9 +103,7 @@ describe("UCSBOrganizationForm tests", () => {
 
     const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
     expect(inactiveCheckbox).toBeChecked();
-
   });
-
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {
     render(

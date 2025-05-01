@@ -246,23 +246,23 @@ describe("UCSBOrganizationTable tests", () => {
   describe("more table tests", () => {
     const queryClient = new QueryClient();
     const testId = "UCSBOrganizationTable";
-  
-    test("test checkbox", async () => {
+
+    test("checkbox", async () => {
       const data = [
         {
           orgCode: "A",
           orgTranslationShort: "a",
           orgTranslation: "AA",
-          inactive: false
+          inactive: false,
         },
         {
           orgCode: "B",
           orgTranslationShort: "b",
           orgTranslation: "BB",
-          inactive: true
-        }
+          inactive: true,
+        },
       ];
-  
+
       render(
         <QueryClientProvider client={queryClient}>
           <MemoryRouter>
@@ -271,19 +271,16 @@ describe("UCSBOrganizationTable tests", () => {
               currentUser={currentUserFixtures.userOnly}
             />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
-  
+
       const cell0 = await screen.findByTestId(
-        `${testId}-cell-row-0-col-inactive`
+        `${testId}-cell-row-0-col-inactive`,
       );
       expect(cell0).toHaveTextContent("No");
-  
-      const cell1 = screen.getByTestId(
-        `${testId}-cell-row-1-col-inactive`
-      );
+
+      const cell1 = screen.getByTestId(`${testId}-cell-row-1-col-inactive`);
       expect(cell1).toHaveTextContent("Yes");
     });
   });
-
 });
