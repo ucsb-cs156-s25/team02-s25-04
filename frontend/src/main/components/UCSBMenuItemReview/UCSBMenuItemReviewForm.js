@@ -44,7 +44,9 @@ function UCSBMenuItemReviewForm({
               id="reviewerEmail"
               type="email"
               isInvalid={Boolean(errors.reviewerEmail)}
-              {...register("reviewerEmail", { required: "Reviewer Email is required." })}
+              {...register("reviewerEmail", {
+                required: "Reviewer Email is required.",
+              })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.reviewerEmail?.message}
@@ -62,8 +64,8 @@ function UCSBMenuItemReviewForm({
               isInvalid={Boolean(errors.stars)}
               {...register("stars", {
                 required: "Stars are required.",
-                min: { value: 1, message: "Minimum is 1" },
-                max: { value: 5, message: "Maximum is 5" },
+                // minLength: { value: 1, message: "Minimum is 1" },
+                // maxLength: { value: 5, message: "Maximum is 5" },
               })}
             />
             <Form.Control.Feedback type="invalid">
@@ -82,7 +84,9 @@ function UCSBMenuItemReviewForm({
               id="dateReviewed"
               type="datetime-local"
               isInvalid={Boolean(errors.dateReviewed)}
-              {...register("dateReviewed", { required: "Date Reviewed is required." })}
+              {...register("dateReviewed", {
+                required: "Date Reviewed is required.",
+              })}
             />
             <Form.Control.Feedback type="invalid">
               {errors.dateReviewed?.message}

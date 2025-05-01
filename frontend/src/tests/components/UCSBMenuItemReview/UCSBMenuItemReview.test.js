@@ -29,10 +29,16 @@ describe("UCSBMenuItemReviewForm tests", () => {
       </Router>,
     );
     expect(screen.getByTestId("UCSBMenuItemReviewForm-id")).toHaveValue("1");
-    expect(screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail")).toHaveValue("student@ucsb.edu");
+    expect(
+      screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"),
+    ).toHaveValue("student@ucsb.edu");
     expect(screen.getByTestId("UCSBMenuItemReviewForm-stars")).toHaveValue(4);
-    expect(screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed")).toHaveValue("2023-05-15T12:00");
-    expect(screen.getByTestId("UCSBMenuItemReviewForm-comments")).toHaveValue("Very tasty!");
+    expect(
+      screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"),
+    ).toHaveValue("2023-05-15T12:00");
+    expect(screen.getByTestId("UCSBMenuItemReviewForm-comments")).toHaveValue(
+      "Very tasty!",
+    );
     expect(screen.getByTestId("UCSBMenuItemReviewForm-itemId")).toHaveValue(42);
   });
 
@@ -51,6 +57,7 @@ describe("UCSBMenuItemReviewForm tests", () => {
     expect(screen.getByText(/Date Reviewed is required/)).toBeInTheDocument();
     expect(screen.getByText(/Comments are required/)).toBeInTheDocument();
     expect(screen.getByText(/Item ID is required/)).toBeInTheDocument();
+
   });
 
   test("No error messages on good input", async () => {
@@ -62,15 +69,21 @@ describe("UCSBMenuItemReviewForm tests", () => {
       </Router>,
     );
 
-    fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"), {
-      target: { value: "student@ucsb.edu" },
-    });
+    fireEvent.change(
+      screen.getByTestId("UCSBMenuItemReviewForm-reviewerEmail"),
+      {
+        target: { value: "student@ucsb.edu" },
+      },
+    );
     fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-stars"), {
       target: { value: 5 },
     });
-    fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"), {
-      target: { value: "2024-04-15T11:30" },
-    });
+    fireEvent.change(
+      screen.getByTestId("UCSBMenuItemReviewForm-dateReviewed"),
+      {
+        target: { value: "2024-04-15T11:30" },
+      },
+    );
     fireEvent.change(screen.getByTestId("UCSBMenuItemReviewForm-comments"), {
       target: { value: "Excellent dish" },
     });
@@ -97,4 +110,6 @@ describe("UCSBMenuItemReviewForm tests", () => {
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
   });
+
+  
 });
