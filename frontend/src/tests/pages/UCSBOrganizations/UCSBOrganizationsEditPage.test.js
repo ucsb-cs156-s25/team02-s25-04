@@ -48,7 +48,9 @@ describe("UCSBOrganizationsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsborganizations", { params: { orgCode: "ZPR" } }).timeout();
+      axiosMock
+        .onGet("/api/ucsborganizations", { params: { orgCode: "ZPR" } })
+        .timeout();
     });
 
     const queryClient = new QueryClient();
@@ -63,7 +65,9 @@ describe("UCSBOrganizationsEditPage tests", () => {
         </QueryClientProvider>,
       );
       await screen.findByText("Edit UCSB Organization");
-      expect(screen.queryByTestId("UCSBOrganization-orgTranslationShort")).not.toBeInTheDocument();
+      expect(
+        screen.queryByTestId("UCSBOrganization-orgTranslationShort"),
+      ).not.toBeInTheDocument();
       restoreConsole();
     });
   });
@@ -80,17 +84,19 @@ describe("UCSBOrganizationsEditPage tests", () => {
       axiosMock
         .onGet("/api/systemInfo")
         .reply(200, systemInfoFixtures.showingNeither);
-      axiosMock.onGet("/api/ucsborganizations", { params: { orgCode: "ZPR" } }).reply(200, {
-        orgCode: "ZPR",
-        orgTranslation: "ZETA PHI RHO",
-        orgTranslationShort: "ZETA PHI RHO",
-        inactive: false
-      });
+      axiosMock
+        .onGet("/api/ucsborganizations", { params: { orgCode: "ZPR" } })
+        .reply(200, {
+          orgCode: "ZPR",
+          orgTranslation: "ZETA PHI RHO",
+          orgTranslationShort: "ZETA PHI RHO",
+          inactive: false,
+        });
       axiosMock.onPut("/api/ucsborganizations").reply(200, {
         orgCode: "ZPR",
         orgTranslation: "ZETA PHI RHO",
         orgTranslationShort: "ZETA PHI RHO",
-        inactive: true
+        inactive: true,
       });
     });
 
@@ -108,8 +114,12 @@ describe("UCSBOrganizationsEditPage tests", () => {
       await screen.findByTestId("UCSBOrganizationForm-orgCode");
 
       const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
-      const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
-      const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
+      const orgTranslationShortField = screen.getByTestId(
+        "UCSBOrganizationForm-orgTranslationShort",
+      );
+      const orgTranslationField = screen.getByTestId(
+        "UCSBOrganizationForm-orgTranslation",
+      );
       const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
       const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
@@ -146,7 +156,7 @@ describe("UCSBOrganizationsEditPage tests", () => {
         JSON.stringify({
           orgTranslation: "ZETA PHI RHO FOREVER",
           orgTranslationShort: "ZETA PHIPHI RHORHO",
-          inactive: true
+          inactive: true,
         }),
       ); // posted object
     });
@@ -163,8 +173,12 @@ describe("UCSBOrganizationsEditPage tests", () => {
       await screen.findByTestId("UCSBOrganizationForm-orgCode");
 
       const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
-      const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
-      const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
+      const orgTranslationShortField = screen.getByTestId(
+        "UCSBOrganizationForm-orgTranslationShort",
+      );
+      const orgTranslationField = screen.getByTestId(
+        "UCSBOrganizationForm-orgTranslation",
+      );
       const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
       const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
 
@@ -177,9 +191,10 @@ describe("UCSBOrganizationsEditPage tests", () => {
       fireEvent.change(orgTranslationField, {
         target: { value: "ZETA PHIPHI RHO" },
       });
-      fireEvent.change(orgTranslationShortField, { target: { value: "zeta phi rho" } });
+      fireEvent.change(orgTranslationShortField, {
+        target: { value: "zeta phi rho" },
+      });
       fireEvent.click(inactiveField);
-
 
       fireEvent.click(submitButton);
 

@@ -35,12 +35,14 @@ export default function UCSBOrganizationsEditPage({ storybook = false }) {
     data: {
       orgTranslation: ucsbOrganization.orgTranslation,
       orgTranslationShort: ucsbOrganization.orgTranslationShort,
-      inactive: ucsbOrganization.inactive
+      inactive: ucsbOrganization.inactive,
     },
   });
 
   const onSuccess = (ucsbOrganization) => {
-    toast(`UCSB Organization Updated - orgCode: ${ucsbOrganization.orgCode} org translation: ${ucsbOrganization.orgTranslationShort}`);
+    toast(
+      `UCSB Organization Updated - orgCode: ${ucsbOrganization.orgCode} org translation: ${ucsbOrganization.orgTranslationShort}`,
+    );
   };
 
   const mutation = useBackendMutation(

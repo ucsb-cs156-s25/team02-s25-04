@@ -27,17 +27,23 @@ Default.parameters = {
       });
     }),
     http.get("/api/ucsborganizations", () => {
-      return HttpResponse.json(ucsbOrganizationFixtures.threeUcsbOrganizations[0], {
-        status: 200,
-      });
+      return HttpResponse.json(
+        ucsbOrganizationFixtures.threeUcsbOrganizations[0],
+        {
+          status: 200,
+        },
+      );
     }),
     http.put("/api/ucsborganizations", () => {
-      return HttpResponse.json({
-        orgCode: "ZPR",
-        orgTranslationShort: "ZETA PHI RHO",
-        orgTranslation: "ZETA PHI RHO",
-        inactive: false,
-      }, { status: 200 });
+      return HttpResponse.json(
+        {
+          orgCode: "ZPR",
+          orgTranslationShort: "ZETA PHI RHO",
+          orgTranslation: "ZETA PHI RHO",
+          inactive: false,
+        },
+        { status: 200 },
+      );
     }),
   ],
 };

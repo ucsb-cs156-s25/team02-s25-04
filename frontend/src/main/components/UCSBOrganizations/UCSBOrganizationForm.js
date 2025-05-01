@@ -86,16 +86,16 @@ function UCSBOrganizationForm({
 
       <Form.Group className="mb-3">
         <Form.Check
-        type="checkbox"
-        id="inactive"
-        label="Inactive"
-        data-testid={`${testIdPrefix}-inactive`}
-        {...register("inactive")}
-        defaultChecked={initialContents?.inactive ?? false}
-        // If you ever want validation feedback on a checkbox:
-        // isInvalid={Boolean(errors.inactive)}
-        // feedback={errors.inactive?.message}
-      />
+          type="checkbox"
+          id="inactive"
+          label="Inactive"
+          data-testid={`${testIdPrefix}-inactive`}
+          {...register("inactive")}
+          defaultChecked={initialContents?.inactive ?? false}
+          // If you ever want validation feedback on a checkbox:
+          // isInvalid={Boolean(errors.inactive)}
+          // feedback={errors.inactive?.message}
+        />
       </Form.Group>
 
       <Button type="submit" data-testid={testIdPrefix + "-submit"}>
