@@ -1,16 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { ucsbMenuItemReviewFixtures } from "fixtures/ucsbMenuItemReviewFixtures"; // assuming this fixture exists
 import { http, HttpResponse } from "msw";
 
-import UCSBMenuItemReviewCreatePage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewCreatePage";
+import UCSBMenuItemReviewEditPage from "main/pages/UCSBMenuItemReview/UCSBMenuItemReviewEditPage";
 
 export default {
-  title: "pages/UCSBMenuItemReview/UCSBMenuItemReviewCreatePage",
-  component: UCSBMenuItemReviewCreatePage,
+  title: "pages/UCSBMenuItemReview/UCSBMenuItemReviewEditPage",
+  component: UCSBMenuItemReviewEditPage,
 };
 
-const Template = () => <UCSBMenuItemReviewCreatePage storybook={true} />;
+const Template = () => <UCSBMenuItemReviewEditPage storybook={true} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -25,7 +26,12 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.post("/api/ucsbmenuitemreview/post", () => {
+    http.get("/api/ucsbmenuitemreview", () => {
+      return HttpResponse.json(ucsbMenuItemReviewFixtures.reviewData[0], {
+        status: 200,
+      });
+    }),
+    http.put("/api/ucsbmenuitemreview", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],

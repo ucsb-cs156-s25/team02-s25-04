@@ -70,9 +70,7 @@ describe("UCSBMenuItemReviewCreatePage tests", () => {
       comments: "Great taste!",
     };
 
-    axiosMock
-      .onPost("/api/ucsbdiningcommonsmenuitemreview/post")
-      .reply(202, review);
+    axiosMock.onPost("/api/ucsbmenuitemreview/post").reply(202, review);
 
     render(
       <QueryClientProvider client={queryClient}>

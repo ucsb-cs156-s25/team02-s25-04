@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 export default function UCSBMenuItemReviewCreatePage({ storybook = false }) {
   const objectToAxiosParams = (review) => ({
-    url: "/api/ucsbdiningcommonsmenuitemreview/post",
+    url: "/api/ucsbmenuitemreview/post",
     method: "POST",
     params: review,
   });
