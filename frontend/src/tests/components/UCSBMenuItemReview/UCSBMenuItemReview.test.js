@@ -57,7 +57,6 @@ describe("UCSBMenuItemReviewForm tests", () => {
     expect(screen.getByText(/Date Reviewed is required/)).toBeInTheDocument();
     expect(screen.getByText(/Comments are required/)).toBeInTheDocument();
     expect(screen.getByText(/Item ID is required/)).toBeInTheDocument();
-
   });
 
   test("No error messages on good input", async () => {
@@ -110,6 +109,4 @@ describe("UCSBMenuItemReviewForm tests", () => {
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
   });
-
-  
 });
