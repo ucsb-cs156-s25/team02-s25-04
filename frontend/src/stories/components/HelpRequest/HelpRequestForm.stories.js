@@ -4,7 +4,7 @@ import { helpRequestFixtures } from "fixtures/helpRequestFixtures";
 
 export default {
   title: "components/HelpRequests/HelpRequestForm",
-  component:HelpRequestForm,
+  component: HelpRequestForm,
 };
 
 const Template = (args) => {

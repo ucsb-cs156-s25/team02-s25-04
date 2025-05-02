@@ -8,23 +8,25 @@ function HelpRequestForm({
   buttonLabel = "Create",
 }) {
   // Stryker disable all
-  const defaultValues = initialContents ? {
-    ...initialContents,
-    requestTime: initialContents?.requestTime.replace("Z", ""),
-  } : {
-    requesterEmail: "",
-    teamId: "",
-    tableOrBreakoutRoom: "",
-    requestTime: "",
-    explanation: "",
-    solved: false,
-  }
+  const defaultValues = initialContents
+    ? {
+        ...initialContents,
+        requestTime: initialContents?.requestTime.replace("Z", ""),
+      }
+    : {
+        requesterEmail: "",
+        teamId: "",
+        tableOrBreakoutRoom: "",
+        requestTime: "",
+        explanation: "",
+        solved: false,
+      };
 
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({defaultValues});
+  } = useForm({ defaultValues });
   // Stryker restore all
 
   const navigate = useNavigate();
@@ -153,8 +155,7 @@ function HelpRequestForm({
           id="solved"
           type="boolean"
           isInvalid={Boolean(errors.solved)}
-          {...register("solved", {
-          })}
+          {...register("solved", {})}
         />
         <Form.Control.Feedback type="invalid">
           {errors.solved?.message}

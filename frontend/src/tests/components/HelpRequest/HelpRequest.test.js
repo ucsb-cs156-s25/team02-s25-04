@@ -16,7 +16,14 @@ jest.mock("react-router-dom", () => ({
 describe("HelpRequestForm tests", () => {
   const queryClient = new QueryClient();
 
-  const expectedHeaders = ["Email", "Team ID", "Table/Breakout Room #", "Request Time (in UTC)","Explanation","Is it Solved?"];
+  const expectedHeaders = [
+    "Email",
+    "Team ID",
+    "Table/Breakout Room #",
+    "Request Time (in UTC)",
+    "Explanation",
+    "Is it Solved?",
+  ];
   const testId = "HelpRequestForm";
 
   test("renders correctly with no initialContents", async () => {
@@ -40,7 +47,9 @@ describe("HelpRequestForm tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <Router>
-          <HelpRequestForm initialContents={helpRequestFixtures.oneHelpRequest} />
+          <HelpRequestForm
+            initialContents={helpRequestFixtures.oneHelpRequest}
+          />
         </Router>
       </QueryClientProvider>,
     );
@@ -87,12 +96,16 @@ describe("HelpRequestForm tests", () => {
 
     await screen.findByText(/Email is required./);
     expect(screen.getByText(/Team ID is required./)).toBeInTheDocument();
-    expect(screen.getByText(/Table or Breakout Room number is required./)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Table or Breakout Room number is required./),
+    ).toBeInTheDocument();
     expect(screen.getByText(/Request Time is required./)).toBeInTheDocument();
     expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
 
     const requesterEmailInput = screen.getByTestId(`${testId}-requesterEmail`);
-    fireEvent.change(requesterEmailInput, { target: { value: "a".repeat(256) } });
+    fireEvent.change(requesterEmailInput, {
+      target: { value: "a".repeat(256) },
+    });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -103,7 +116,7 @@ describe("HelpRequestForm tests", () => {
     fireEvent.change(explanationInput, { target: { value: "a".repeat(256) } });
     fireEvent.click(submitButton);
     await waitFor(() => {
-        expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
-      });
+      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+    });
   });
 });
