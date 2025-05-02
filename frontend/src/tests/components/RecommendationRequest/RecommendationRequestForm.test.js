@@ -15,7 +15,7 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm />
-      </Router>
+      </Router>,
     );
     await screen.findByText(/Requester Email/);
     await screen.findByText(/Create/);
@@ -27,7 +27,7 @@ describe("RecommendationRequestForm tests", () => {
         <RecommendationRequestForm
           initialContents={recommendationRequestFixtures.oneRequest}
         />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId(/RecommendationRequestForm-id/);
     expect(screen.getByText(/Id/)).toBeInTheDocument();
@@ -38,14 +38,14 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("RecommendationRequestForm-requesterEmail");
     const requesterEmailField = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail"
+      "RecommendationRequestForm-requesterEmail",
     );
     const professorEmailField = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail"
+      "RecommendationRequestForm-professorEmail",
     );
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
@@ -60,7 +60,7 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("RecommendationRequestForm-submit");
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
@@ -78,18 +78,18 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm submitAction={mockSubmitAction} />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("RecommendationRequestForm-requesterEmail");
 
     const requesterEmailField = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail"
+      "RecommendationRequestForm-requesterEmail",
     );
     const professorEmailField = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail"
+      "RecommendationRequestForm-professorEmail",
     );
     const explanationField = screen.getByTestId(
-      "RecommendationRequestForm-explanation"
+      "RecommendationRequestForm-explanation",
     );
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
@@ -114,7 +114,7 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm />
-      </Router>
+      </Router>,
     );
     await screen.findByTestId("RecommendationRequestForm-cancel");
     const cancelButton = screen.getByTestId("RecommendationRequestForm-cancel");
