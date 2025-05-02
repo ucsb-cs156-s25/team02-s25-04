@@ -53,7 +53,8 @@ describe("RecommendationRequestForm tests", () => {
     fireEvent.change(professorEmailField, { target: { value: "bad-email" } });
     fireEvent.click(submitButton);
 
-    await screen.findByText(/Invalid email address/);
+    const errorMessages = await screen.findAllByText(/Invalid email address/);
+    expect(errorMessages).toHaveLength(2);
   });
 
   test("Correct Error messages on missing input", async () => {
