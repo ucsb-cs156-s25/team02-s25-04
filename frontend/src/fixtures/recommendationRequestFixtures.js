@@ -27,7 +27,7 @@ const recommendationRequestFixtures = {
       professorEmail: "test3@test.com",
       explanation: "Test explanation 3",
       dateRequested: "2021-01-03T00:00:00Z",
-    },  
+    },
   ],
 };
 
