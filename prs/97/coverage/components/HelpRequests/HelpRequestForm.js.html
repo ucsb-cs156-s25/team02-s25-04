@@ -242,7 +242,19 @@
 <a name='L177'></a><a href='#L177'>177</a>
 <a name='L178'></a><a href='#L178'>178</a>
 <a name='L179'></a><a href='#L179'>179</a>
-<a name='L180'></a><a href='#L180'>180</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a>
+<a name='L185'></a><a href='#L185'>185</a>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -286,6 +298,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -421,7 +445,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form } from "react-bootstrap";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Button, Form, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 &nbsp;
@@ -466,90 +490,102 @@ function HelpRequestForm({
 &nbsp;
   return (
     &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
-      {initialContents &amp;&amp; (
-        &lt;Form.Group className="mb-3"&gt;
-          &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
-          &lt;Form.Control
-            data-testid={testIdPrefix + "-id"}
-            id="id"
-            type="text"
-            {...register("id")}
-            value={initialContents.id}
-            disabled
-          /&gt;
-        &lt;/Form.Group&gt;
-      )}
+      &lt;Row&gt;
+        {initialContents &amp;&amp; (
+          &lt;Col&gt;
+            &lt;Form.Group className="mb-3"&gt;
+              &lt;Form.Label htmlFor="id"&gt;Id&lt;/Form.Label&gt;
+              &lt;Form.Control
+                data-testid={testIdPrefix + "-id"}
+                id="id"
+                type="text"
+                {...register("id")}
+                value={initialContents.id}
+                disabled
+              /&gt;
+            &lt;/Form.Group&gt;
+          &lt;/Col&gt;
+        )}
 &nbsp;
-      &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="requesterEmail"&gt;Email&lt;/Form.Label&gt;
-        &lt;Form.Control
-          data-testid={testIdPrefix + "-requesterEmail"}
-          id="requesterEmail"
-          type="text"
-          isInvalid={Boolean(errors.requesterEmail)}
-          {...register("requesterEmail", {
-            required: "Email is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
-          })}
-        /&gt;
-        &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.requesterEmail?.message}
-        &lt;/Form.Control.Feedback&gt;
-      &lt;/Form.Group&gt;
+        &lt;Col&gt;
+          &lt;Form.Group className="mb-3"&gt;
+            &lt;Form.Label htmlFor="requesterEmail"&gt;Email&lt;/Form.Label&gt;
+            &lt;Form.Control
+              data-testid={testIdPrefix + "-requesterEmail"}
+              id="requesterEmail"
+              type="text"
+              isInvalid={Boolean(errors.requesterEmail)}
+              {...register("requesterEmail", {
+                required: "Email is required.",
+                maxLength: {
+                  value: 255,
+                  message: "Max length 255 characters",
+                },
+              })}
+            /&gt;
+            &lt;Form.Control.Feedback type="invalid"&gt;
+              {errors.requesterEmail?.message}
+            &lt;/Form.Control.Feedback&gt;
+          &lt;/Form.Group&gt;
+        &lt;/Col&gt;
 &nbsp;
-      &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="teamId"&gt;Team ID&lt;/Form.Label&gt;
-        &lt;Form.Control
-          data-testid={testIdPrefix + "-teamId"}
-          id="teamId"
-          type="text"
-          isInvalid={Boolean(errors.teamId)}
-          {...register("teamId", {
-            required: "Team ID is required.",
-          })}
-        /&gt;
-        &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.teamId?.message}
-        &lt;/Form.Control.Feedback&gt;
-      &lt;/Form.Group&gt;
-&nbsp;
-      &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="tableOrBreakoutRoom"&gt;
-          Table/Breakout Room #
-        &lt;/Form.Label&gt;
-        &lt;Form.Control
-          data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
-          id="tableOrBreakoutRoom"
-          type="text"
-          isInvalid={Boolean(errors.tableOrBreakoutRoom)}
-          {...register("tableOrBreakoutRoom", {
-            required: "Table or Breakout Room number is required.",
-          })}
-        /&gt;
-        &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.tableOrBreakoutRoom?.message}
-        &lt;/Form.Control.Feedback&gt;
-      &lt;/Form.Group&gt;
-&nbsp;
-      &lt;Form.Group className="mb-3"&gt;
-        &lt;Form.Label htmlFor="requestTime"&gt;Request Time (in UTC)&lt;/Form.Label&gt;
-        &lt;Form.Control
-          data-testid={testIdPrefix + "-requestTime"}
-          id="requestTime"
-          type="datetime-local"
-          isInvalid={Boolean(errors.requestTime)}
-          {...register("requestTime", {
-            required: true,
-            pattern: isodate_regex,
-          })}
-        /&gt;
-        &lt;Form.Control.Feedback type="invalid"&gt;
-          {errors.requestTime &amp;&amp; "Request Time is required. "}
-        &lt;/Form.Control.Feedback&gt;
-      &lt;/Form.Group&gt;
+        &lt;Col&gt;
+          &lt;Form.Group className="mb-3"&gt;
+            &lt;Form.Label htmlFor="teamId"&gt;Team ID&lt;/Form.Label&gt;
+            &lt;Form.Control
+              data-testid={testIdPrefix + "-teamId"}
+              id="teamId"
+              type="text"
+              isInvalid={Boolean(errors.teamId)}
+              {...register("teamId", {
+                required: "Team ID is required.",
+              })}
+            /&gt;
+            &lt;Form.Control.Feedback type="invalid"&gt;
+              {errors.teamId?.message}
+            &lt;/Form.Control.Feedback&gt;
+          &lt;/Form.Group&gt;
+        &lt;/Col&gt;
+      &lt;/Row&gt;
+      &lt;Row&gt;
+        &lt;Col&gt;
+          &lt;Form.Group className="mb-3"&gt;
+            &lt;Form.Label htmlFor="tableOrBreakoutRoom"&gt;
+              Table/Breakout Room #
+            &lt;/Form.Label&gt;
+            &lt;Form.Control
+              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+              id="tableOrBreakoutRoom"
+              type="text"
+              isInvalid={Boolean(errors.tableOrBreakoutRoom)}
+              {...register("tableOrBreakoutRoom", {
+                required: "Table or Breakout Room number is required.",
+              })}
+            /&gt;
+            &lt;Form.Control.Feedback type="invalid"&gt;
+              {errors.tableOrBreakoutRoom?.message}
+            &lt;/Form.Control.Feedback&gt;
+          &lt;/Form.Group&gt;
+        &lt;/Col&gt;
+        &lt;Col&gt;
+          &lt;Form.Group className="mb-3"&gt;
+            &lt;Form.Label htmlFor="requestTime"&gt;Request Time (in UTC)&lt;/Form.Label&gt;
+            &lt;Form.Control
+              data-testid={testIdPrefix + "-requestTime"}
+              id="requestTime"
+              type="datetime-local"
+              isInvalid={Boolean(errors.requestTime)}
+              {...register("requestTime", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            /&gt;
+            &lt;Form.Control.Feedback type="invalid"&gt;
+              {errors.requestTime &amp;&amp; "Request Time is required. "}
+            &lt;/Form.Control.Feedback&gt;
+          &lt;/Form.Group&gt;
+        &lt;/Col&gt;
+      &lt;/Row&gt;
 &nbsp;
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="explanation"&gt;Explanation&lt;/Form.Label&gt;
@@ -607,7 +643,7 @@ export default HelpRequestForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-02T20:00:45.953Z
+                at 2025-05-02T20:14:35.922Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
