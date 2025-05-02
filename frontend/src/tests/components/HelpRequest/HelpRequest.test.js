@@ -109,14 +109,17 @@ describe("HelpRequestForm tests", () => {
     fireEvent.click(submitButton);
 
     await waitFor(() => {
-      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+      expect(screen.getByText(/Email - Max length 255 characters/)).toBeInTheDocument();
     });
 
     const explanationInput = screen.getByTestId(`${testId}-explanation`);
-    fireEvent.change(explanationInput, { target: { value: "a".repeat(256) } });
+    fireEvent.change(explanationInput, {
+         target: { value: "a".repeat(256)},
+    });
     fireEvent.click(submitButton);
+    
     await waitFor(() => {
-      expect(screen.getByText(/Max length 255 characters/)).toBeInTheDocument();
+      expect(screen.getByText(/Explanation - Max length 255 characters/)).toBeInTheDocument();
     });
   });
 });

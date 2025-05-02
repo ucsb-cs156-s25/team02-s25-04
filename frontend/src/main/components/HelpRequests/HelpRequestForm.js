@@ -72,7 +72,7 @@ function HelpRequestForm({
                 required: "Email is required.",
                 maxLength: {
                   value: 255,
-                  message: "Max length 255 characters",
+                  message: "Email - Max length 255 characters",
                 },
               })}
             />
@@ -86,7 +86,6 @@ function HelpRequestForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teamId">Team ID</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-teamId"}
               id="teamId"
               type="text"
               isInvalid={Boolean(errors.teamId)}
@@ -107,7 +106,6 @@ function HelpRequestForm({
               Table/Breakout Room #
             </Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
               id="tableOrBreakoutRoom"
               type="text"
               isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -124,7 +122,6 @@ function HelpRequestForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">Request Time (in UTC)</Form.Label>
             <Form.Control
-              data-testid={testIdPrefix + "-requestTime"}
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
@@ -151,7 +148,7 @@ function HelpRequestForm({
             required: "Explanation is required.",
             maxLength: {
               value: 255,
-              message: "Max length 255 characters",
+              message: "Explanation - Max length 255 characters",
             },
           })}
         />
@@ -163,7 +160,6 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="solved">Is it Solved? </Form.Label>
         <Form.Control
-          data-testid={testIdPrefix + "-solved"}
           id="solved"
           type="boolean"
           isInvalid={Boolean(errors.solved)}
@@ -174,7 +170,7 @@ function HelpRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+      <Button type="submit">
         {buttonLabel}
       </Button>
       <Button
