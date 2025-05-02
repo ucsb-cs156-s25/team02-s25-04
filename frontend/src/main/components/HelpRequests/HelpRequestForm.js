@@ -1,4 +1,4 @@
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -43,90 +43,102 @@ function HelpRequestForm({
 
   return (
     <Form onSubmit={handleSubmit(submitAction)}>
-      {initialContents && (
-        <Form.Group className="mb-3">
-          <Form.Label htmlFor="id">Id</Form.Label>
-          <Form.Control
-            data-testid={testIdPrefix + "-id"}
-            id="id"
-            type="text"
-            {...register("id")}
-            value={initialContents.id}
-            disabled
-          />
-        </Form.Group>
-      )}
+      <Row>
+        {initialContents && (
+          <Col>
+            <Form.Group className="mb-3">
+              <Form.Label htmlFor="id">Id</Form.Label>
+              <Form.Control
+                data-testid={testIdPrefix + "-id"}
+                id="id"
+                type="text"
+                {...register("id")}
+                value={initialContents.id}
+                disabled
+              />
+            </Form.Group>
+          </Col>
+        )}
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="requesterEmail">Email</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-requesterEmail"}
-          id="requesterEmail"
-          type="text"
-          isInvalid={Boolean(errors.requesterEmail)}
-          {...register("requesterEmail", {
-            required: "Email is required.",
-            maxLength: {
-              value: 255,
-              message: "Max length 255 characters",
-            },
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.requesterEmail?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="requesterEmail">Email</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-requesterEmail"}
+              id="requesterEmail"
+              type="text"
+              isInvalid={Boolean(errors.requesterEmail)}
+              {...register("requesterEmail", {
+                required: "Email is required.",
+                maxLength: {
+                  value: 255,
+                  message: "Max length 255 characters",
+                },
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.requesterEmail?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
 
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="teamId">Team ID</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-teamId"}
-          id="teamId"
-          type="text"
-          isInvalid={Boolean(errors.teamId)}
-          {...register("teamId", {
-            required: "Team ID is required.",
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.teamId?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="tableOrBreakoutRoom">
-          Table/Breakout Room #
-        </Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
-          id="tableOrBreakoutRoom"
-          type="text"
-          isInvalid={Boolean(errors.tableOrBreakoutRoom)}
-          {...register("tableOrBreakoutRoom", {
-            required: "Table or Breakout Room number is required.",
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.tableOrBreakoutRoom?.message}
-        </Form.Control.Feedback>
-      </Form.Group>
-
-      <Form.Group className="mb-3">
-        <Form.Label htmlFor="requestTime">Request Time (in UTC)</Form.Label>
-        <Form.Control
-          data-testid={testIdPrefix + "-requestTime"}
-          id="requestTime"
-          type="datetime-local"
-          isInvalid={Boolean(errors.requestTime)}
-          {...register("requestTime", {
-            required: true,
-            pattern: isodate_regex,
-          })}
-        />
-        <Form.Control.Feedback type="invalid">
-          {errors.requestTime && "Request Time is required. "}
-        </Form.Control.Feedback>
-      </Form.Group>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="teamId">Team ID</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-teamId"}
+              id="teamId"
+              type="text"
+              isInvalid={Boolean(errors.teamId)}
+              {...register("teamId", {
+                required: "Team ID is required.",
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.teamId?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="tableOrBreakoutRoom">
+              Table/Breakout Room #
+            </Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+              id="tableOrBreakoutRoom"
+              type="text"
+              isInvalid={Boolean(errors.tableOrBreakoutRoom)}
+              {...register("tableOrBreakoutRoom", {
+                required: "Table or Breakout Room number is required.",
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.tableOrBreakoutRoom?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="requestTime">Request Time (in UTC)</Form.Label>
+            <Form.Control
+              data-testid={testIdPrefix + "-requestTime"}
+              id="requestTime"
+              type="datetime-local"
+              isInvalid={Boolean(errors.requestTime)}
+              {...register("requestTime", {
+                required: true,
+                pattern: isodate_regex,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.requestTime && "Request Time is required. "}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+      </Row>
 
       <Form.Group className="mb-3">
         <Form.Label htmlFor="explanation">Explanation</Form.Label>
