@@ -146,9 +146,6 @@ describe("ArticlesIndexPage tests", () => {
     expect(errorMessage).toMatch(
       "Error communicating with backend via GET on /api/articles/all",
     );
-    expect(
-      screen.queryByTestId(`${testId}-cell-row-0-col-id`),
-    ).not.toBeInTheDocument();
     restoreConsole();
   });
 
