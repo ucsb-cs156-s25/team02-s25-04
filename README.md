@@ -1,6 +1,6 @@
 # team02-s25-04
 
-Instructions: https://github.com/ucsb-cs156-s25/team02-s25-04.git
+Instructions: https://ucsb-cs156.github.io/s25/lab/team02.html
 
 Deployments:
 
