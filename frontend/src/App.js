@@ -123,8 +123,6 @@ function App() {
               Fahim-HelpRequest-Pages
               path="/helpRequests"
               element={<HelpRequestsIndexPage />}
-              path="/ucsborganizations"
-              element={<UCSBOrganizationsIndexPage />}
               main
             />
           </>
@@ -141,14 +139,6 @@ function App() {
               exact
               path="/helpRequests/create"
               element={<HelpRequestsCreatePage />}
-              path="/ucsborganizations/edit/:id"
-              element={<UCSBOrganizationsEditPage />}
-            />
-            <Route
-              exact
-              path="/ucsborganizations/create"
-              element={<UCSBOrganizationsCreatePage />}
-              main
             />
           </>
         )}
