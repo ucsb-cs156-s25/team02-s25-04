@@ -24,7 +24,10 @@ Create.args = {
 export const Update = Template.bind({});
 
 Update.args = {
-  initialContents: recommendationRequestFixtures.oneRequest,
+  initialContents: {
+    ...recommendationRequestFixtures.oneRequest,
+    dateRequested: "2021-01-01T00:00",
+  },
   buttonLabel: "Update",
   submitAction: (data) => {
     console.log("Submit was clicked with data: ", data);
