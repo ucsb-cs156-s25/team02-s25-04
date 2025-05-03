@@ -147,9 +147,7 @@ describe("ArticlesIndexPage tests", () => {
       "Error communicating with backend via GET on /api/articles/all",
     );
     restoreConsole();
-  
   });
-
 
   test("what happens when you click delete, admin", async () => {
     setupAdminUser();
