@@ -39,6 +39,12 @@ describe("UCSBOrganizationForm tests", () => {
       const header = screen.getByText(headerText);
       expect(header).toBeInTheDocument();
     });
+    const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
+    expect(orgCodeInput).toHaveValue(""); //checking defaults
+    expect(orgCodeInput).not.toBeDisabled();
+
+    const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
+    expect(inactiveCheckbox).not.toBeChecked();
   });
 
   test("renders correctly when passing in initialContents", async () => {
@@ -61,6 +67,42 @@ describe("UCSBOrganizationForm tests", () => {
 
     expect(await screen.findByTestId(`${testId}-orgCode`)).toBeInTheDocument();
     expect(screen.getByText(`Org Code`)).toBeInTheDocument();
+
+    const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
+    expect(orgCodeInput).toHaveValue("ZPR");
+    expect(orgCodeInput).toBeDisabled();
+
+    const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
+    expect(inactiveCheckbox).not.toBeChecked();
+  });
+
+  test("checkbox test", async () => {
+    render(
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <UCSBOrganizationForm
+            initialContents={ucsbOrganizationFixtures.threeUcsbOrganizations[2]}
+          />
+        </Router>
+      </QueryClientProvider>,
+    );
+
+    expect(await screen.findByText(/Create/)).toBeInTheDocument();
+
+    expectedHeaders.forEach((headerText) => {
+      const header = screen.getByText(headerText);
+      expect(header).toBeInTheDocument();
+    });
+
+    expect(await screen.findByTestId(`${testId}-orgCode`)).toBeInTheDocument();
+    expect(screen.getByText(`Org Code`)).toBeInTheDocument();
+
+    const orgCodeInput = screen.getByTestId(`${testId}-orgCode`);
+    expect(orgCodeInput).toHaveValue("OSLI");
+    expect(orgCodeInput).toBeDisabled();
+
+    const inactiveCheckbox = screen.getByTestId(`${testId}-inactive`);
+    expect(inactiveCheckbox).toBeChecked();
   });
 
   test("that navigate(-1) is called when Cancel is clicked", async () => {

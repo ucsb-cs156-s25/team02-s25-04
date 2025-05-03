@@ -28,6 +28,7 @@ function UCSBOrganizationForm({
             data-testid={testIdPrefix + "-orgCode"}
             id="orgCode"
             type="text"
+            placeholder="Enter org code"
             isInvalid={Boolean(errors.orgCode)}
             {...register("orgCode", {
               required: "Org Code is required.",
@@ -36,6 +37,8 @@ function UCSBOrganizationForm({
                 message: "Max length 10 characters",
               },
             })}
+            //defaultValue={initialContents?.orgCode ?? ""}
+            disabled={Boolean(initialContents)}
           />
           <Form.Control.Feedback type="invalid">
             {errors.orgCode?.message}
@@ -68,6 +71,7 @@ function UCSBOrganizationForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="orgTranslation">Org Translation</Form.Label>
         <Form.Control
+          data-testid={testIdPrefix + "-orgTranslation"}
           id="orgTranslation"
           type="text"
           isInvalid={Boolean(errors.orgTranslation)}
@@ -81,23 +85,19 @@ function UCSBOrganizationForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="inactive">Inactive</Form.Label>
-        <Form.Control
-          id="inactive"
-          //type="boolean" // possibly change to text
+        <Form.Check
           type="checkbox"
-          isInvalid={Boolean(errors.inactive)}
-          //{...register("inactive", {
-          //  required: "inactive is required.",
-          //})}
+          id="inactive"
+          label="Inactive"
+          data-testid={`${testIdPrefix}-inactive`}
           {...register("inactive")}
+          //defaultChecked={initialContents?.inactive ?? false}
         />
-        <Form.Control.Feedback type="invalid">
-          {errors.inactive?.message}
-        </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">{buttonLabel}</Button>
+      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+        {buttonLabel}
+      </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
