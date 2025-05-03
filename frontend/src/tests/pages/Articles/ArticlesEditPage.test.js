@@ -122,11 +122,17 @@ describe("ArticlesEditPage tests", () => {
       expect(idField).toBeInTheDocument();
       expect(idField).toHaveValue("17");
       expect(titleField).toBeInTheDocument();
-      expect(titleField).toHaveValue("FZ - Copied files from team01 for Backend");
+      expect(titleField).toHaveValue(
+        "FZ - Copied files from team01 for Backend",
+      );
       expect(emailField).toBeInTheDocument();
-      expect(urlField).toBeInTheDocument("https://github.com/ucsb-cs156-s25/team02-s25-04/commit/090e4183ffa92de16915b01db3ea787ed239f1f1");
+      expect(urlField).toBeInTheDocument(
+        "https://github.com/ucsb-cs156-s25/team02-s25-04/commit/090e4183ffa92de16915b01db3ea787ed239f1f1",
+      );
       expect(explanationField).toBeInTheDocument();
-      expect(explanationField).toHaveValue("Copied files from team01 for Backend");
+      expect(explanationField).toHaveValue(
+        "Copied files from team01 for Backend",
+      );
       expect(emailField).toBeInTheDocument();
       expect(emailField).toHaveValue("fahimzaman@ucsb.edu");
       expect(dateAddedField).toBeInTheDocument();
@@ -139,7 +145,8 @@ describe("ArticlesEditPage tests", () => {
       });
       fireEvent.change(urlField, {
         target: {
-          value: "https://github.com/ucsb-cs156-s25/team02-s25-02/commit/090e4183ffa92de16915b01db3ea787ed239f1f1",
+          value:
+            "https://github.com/ucsb-cs156-s25/team02-s25-02/commit/090e4183ffa92de16915b01db3ea787ed239f1f1",
         },
       });
       fireEvent.change(explanationField, {
