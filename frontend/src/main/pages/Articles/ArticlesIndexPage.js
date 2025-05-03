@@ -31,6 +31,7 @@ export default function ArticlesIndexPage() {
     // Stryker disable next-line all : don't test internal caching of React Query
     ["/api/articles/all"],
     { method: "GET", url: "/api/articles/all" },
+    // Stryker disable next-line ArrayDeclaration
     [],
   );
 
