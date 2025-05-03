@@ -52,7 +52,7 @@ describe("RecommendationRequestCreatePage tests", () => {
         <MemoryRouter>
           <RecommendationRequestCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
   });
 
@@ -74,26 +74,26 @@ describe("RecommendationRequestCreatePage tests", () => {
         <MemoryRouter>
           <RecommendationRequestCreatePage />
         </MemoryRouter>
-      </QueryClientProvider>
+      </QueryClientProvider>,
     );
 
     await waitFor(() => {
       expect(
-        screen.getByTestId("RecommendationRequestForm-requesterEmail")
+        screen.getByTestId("RecommendationRequestForm-requesterEmail"),
       ).toBeInTheDocument();
     });
 
     const requesterEmailInput = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail"
+      "RecommendationRequestForm-requesterEmail",
     );
     const professorEmailInput = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail"
+      "RecommendationRequestForm-professorEmail",
     );
     const explanationInput = screen.getByTestId(
-      "RecommendationRequestForm-explanation"
+      "RecommendationRequestForm-explanation",
     );
     const dateRequestedInput = screen.getByTestId(
-      "RecommendationRequestForm-dateRequested"
+      "RecommendationRequestForm-dateRequested",
     );
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
@@ -124,7 +124,7 @@ describe("RecommendationRequestCreatePage tests", () => {
     });
 
     expect(mockToast).toBeCalledWith(
-      "New Recommendation Request Created - id: 17"
+      "New Recommendation Request Created - id: 17",
     );
     expect(mockNavigate).toBeCalledWith({ to: "/recommendationrequest" });
   });
