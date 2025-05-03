@@ -4,7 +4,7 @@ import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import { http, HttpResponse } from "msw";
 
 import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
-import { restaurantFixtures } from "fixtures/restaurantFixtures";
+import { articlesFixtures } from "fixtures/articlesFixtures";
 
 export default {
   title: "pages/Articles/ArticlesEditPage",
@@ -27,7 +27,7 @@ Default.parameters = {
       });
     }),
     http.get("/api/articles", () => {
-      return HttpResponse.json(restaurantFixtures.threeArticles[0], {
+      return HttpResponse.json(articlesFixtures.threeArticles[0], {
         status: 200,
       });
     }),
