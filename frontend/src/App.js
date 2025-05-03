@@ -120,13 +120,12 @@ function App() {
           <>
             <Route
               exact
-         Fahim-HelpRequest-Pages
+              Fahim-HelpRequest-Pages
               path="/helpRequests"
               element={<HelpRequestsIndexPage />}
-
               path="/ucsborganizations"
               element={<UCSBOrganizationsIndexPage />}
-          main
+              main
             />
           </>
         )}
@@ -134,7 +133,7 @@ function App() {
           <>
             <Route
               exact
-       Fahim-HelpRequest-Pages
+              Fahim-HelpRequest-Pages
               path="/helpRequests/edit/:id"
               element={<HelpRequestsEditPage />}
             />
@@ -142,7 +141,6 @@ function App() {
               exact
               path="/helpRequests/create"
               element={<HelpRequestsCreatePage />}
-
               path="/ucsborganizations/edit/:id"
               element={<UCSBOrganizationsEditPage />}
             />
@@ -150,7 +148,7 @@ function App() {
               exact
               path="/ucsborganizations/create"
               element={<UCSBOrganizationsCreatePage />}
-       main
+              main
             />
           </>
         )}
