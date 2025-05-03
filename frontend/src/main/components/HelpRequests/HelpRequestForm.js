@@ -158,10 +158,10 @@ function HelpRequestForm({
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label htmlFor="solved">Is it Solved? </Form.Label>
-        <Form.Control
+        <Form.Label htmlFor="solved">Has it been solved?</Form.Label>
+        <Form.Check
           id="solved"
-          type="boolean"
+          type="checkbox"
           isInvalid={Boolean(errors.solved)}
           {...register("solved", {})}
         />
