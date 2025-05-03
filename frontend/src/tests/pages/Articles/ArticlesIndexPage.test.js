@@ -149,6 +149,28 @@ describe("ArticlesIndexPage tests", () => {
     restoreConsole();
   });
 
+  test("renders no rows when articles list is empty", async () => {
+    setupUserOnly();
+    
+    axiosMock.onGet("/api/articles/all").reply(200, []);
+  
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <ArticlesIndexPage />
+        </MemoryRouter>
+      </QueryClientProvider>,
+    );
+  
+   
+    await waitFor(() => {
+     
+      expect(
+        screen.queryByTestId(`${testId}-cell-row-0-col-id`)
+      ).not.toBeInTheDocument();
+    });
+  });
+
   test("what happens when you click delete, admin", async () => {
     setupAdminUser();
 
@@ -193,27 +215,5 @@ describe("ArticlesIndexPage tests", () => {
     });
     expect(axiosMock.history.delete[0].url).toBe("/api/articles");
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
-  });
-
-  test("renders no rows when articles list is empty", async () => {
-    setupUserOnly();
-    
-    axiosMock.onGet("/api/articles/all").reply(200, []);
-  
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <ArticlesIndexPage />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-  
-   
-    await waitFor(() => {
-     
-      expect(
-        screen.queryByTestId(`${testId}-cell-row-0-col-id`)
-      ).not.toBeInTheDocument();
-    });
   });
 });
