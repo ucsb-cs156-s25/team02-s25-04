@@ -5,6 +5,7 @@ import { MemoryRouter } from "react-router-dom";
 import mockConsole from "jest-mock-console";
 import { articlesFixtures } from "fixtures/articlesFixtures";
 
+
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
 import axios from "axios";
@@ -194,5 +195,6 @@ describe("ArticlesIndexPage tests", () => {
     expect(axiosMock.history.delete[0].url).toBe("/api/articles");
     expect(axiosMock.history.delete[0].url).toBe("/api/articles");
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
+    
   });
 });
