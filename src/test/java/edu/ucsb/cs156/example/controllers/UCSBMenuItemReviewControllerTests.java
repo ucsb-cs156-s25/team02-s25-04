@@ -84,7 +84,7 @@ public class UCSBMenuItemReviewControllerTests extends ControllerTestCase {
 
     @WithMockUser(roles = { "USER" })
     @Test
-    public void logged_in_user_can_get_all_ucsbmenuitemreviews() throws Exception {
+    public void logged_in_user_can_get_all_UCSBMenuItemReview() throws Exception {
         // arrange
         LocalDateTime dt1 = LocalDateTime.parse("2024-11-01T12:00:00");
         LocalDateTime dt2 = LocalDateTime.parse("2024-12-15T08:30:00");

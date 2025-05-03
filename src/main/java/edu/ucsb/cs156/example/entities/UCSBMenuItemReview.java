@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * This is a JPA entity that represents a UCSBMenuItemReviews, i.e. an entry
+ * This is a JPA entity that represents a UCSBMenuItemReview, i.e. an entry
  * that comes from the UCSB API for academic calendar dates.
  */
 
