@@ -98,7 +98,7 @@ describe("ArticlesIndexPage tests", () => {
     const createButton = screen.queryByText("Create Articles");
     expect(createButton).not.toBeInTheDocument();
 
-    const title = screen.getByText("FZ - Copied files from team01 for Backend");
+    const title = screen.getByText("FZ - Copied files from team01 for Backend",);
     expect(title).toBeInTheDocument();
 
     const url = screen.getByText(
@@ -111,10 +111,10 @@ describe("ArticlesIndexPage tests", () => {
     );
     expect(explanation).toBeInTheDocument();
 
-    const email = screen.getByText("fahimzaman@ucsb.edu");
+    const email = screen.getByText("fahimzaman@ucsb.edu",);
     expect(email).toBeInTheDocument();
 
-    const dateAdded = screen.getByText("2025-04-29T08:45:00");
+    const dateAdded = screen.getByText("2025-04-29T08:45:00",);
     expect(dateAdded).toBeInTheDocument();
 
     // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
