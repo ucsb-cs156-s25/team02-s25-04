@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import HelpRequestsCreatePageCreatePage from "main/pages/HelpRequests/HelpRequestsCreatePage";
+import HelpRequestsCreatePage from "main/pages/HelpRequests/HelpRequestsCreatePage";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 
