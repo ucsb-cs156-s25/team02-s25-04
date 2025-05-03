@@ -240,4 +240,54 @@ describe("HelpRequestTable tests", () => {
       await waitFor(() => expect(axiosMock.history.delete.length).toBe(1));
       expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
     });
+
+    test("Solved Boolean is displayed correctly", () => {
+        // arrange
+        const currentUser = currentUserFixtures.adminUser;
+    
+        // act
+        render(
+            <QueryClientProvider client={queryClient}>
+            <MemoryRouter>
+                <HelpRequestTable
+                helpRequests={helpRequestFixtures.threeHelpRequests}
+                currentUser={currentUser}
+                />
+            </MemoryRouter>
+            </QueryClientProvider>,
+        );
+    
+        // assert
+        expect(
+            screen.getByTestId(`${testId}-cell-row-0-col-solved`),
+        ).toHaveTextContent("No");
+        expect(
+            screen.getByTestId(`${testId}-cell-row-1-col-solved`),
+        ).toHaveTextContent("Yes");
+    });
+
+    test("Request Time is displayed correctly", () => {
+        // arrange
+        const currentUser = currentUserFixtures.adminUser;
+    
+        // act
+        render(
+            <QueryClientProvider client={queryClient}>
+            <MemoryRouter>
+                <HelpRequestTable
+                helpRequests={helpRequestFixtures.threeHelpRequests}
+                currentUser={currentUser}
+                />
+            </MemoryRouter>
+            </QueryClientProvider>,
+        );
+    
+        // assert
+        expect(
+            screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
+        ).toHaveTextContent("2025-04-30T06:26:00Z");
+        expect(
+            screen.getByTestId(`${testId}-cell-row-1-col-requestTime`),
+        ).toHaveTextContent("2025-04-30T06:26:00Z");
+    });
 });
