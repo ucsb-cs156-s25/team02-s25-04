@@ -1,7 +1,7 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
-import { restaurantFixtures } from "fixtures/restaurantFixtures";
+import { articlesFixtures } from "fixtures/articlesFixtures";
 import { http, HttpResponse } from "msw";
 
 import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
@@ -59,11 +59,11 @@ ThreeItemsAdminUser.parameters = {
       return HttpResponse.json(systemInfoFixtures.showingNeither);
     }),
     http.get("/api/articles/all", () => {
-      return HttpResponse.json(restaurantFixtures.threeArticles);
+      return HttpResponse.json(articlesFixtures.threeArticles);
     }),
     http.delete("/api/articles", () => {
       return HttpResponse.json(
-        { message: "Restaurant deleted successfully" },
+        { message: "Articles deleted successfully" },
         { status: 200 },
       );
     }),
