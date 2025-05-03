@@ -157,7 +157,7 @@ describe("ArticlesIndexPage tests", () => {
       .reply(200, articlesFixtures.threeArticles);
     axiosMock
       .onDelete("/api/articles")
-      .reply(200, "Articles with id 1 was deleted");
+      .reply(200, "Articles with id 2 was deleted");
 
     render(
       <QueryClientProvider client={queryClient}>
@@ -185,12 +185,13 @@ describe("ArticlesIndexPage tests", () => {
     fireEvent.click(deleteButton);
 
     await waitFor(() => {
-      expect(mockToast).toHaveBeenCalledWith("Articles with id 1 was deleted");
+      expect(mockToast).toHaveBeenCalledWith("Articles with id 2 was deleted");
     });
 
     await waitFor(() => {
       expect(axiosMock.history.delete.length).toBe(1);
     });
+    expect(axiosMock.history.delete[0].url).toBe("/api/articles");
     expect(axiosMock.history.delete[0].url).toBe("/api/articles");
     expect(axiosMock.history.delete[0].params).toEqual({ id: 2 });
   });
