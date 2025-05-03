@@ -56,9 +56,7 @@ describe("RecommendationRequestForm tests", () => {
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
     fireEvent.click(submitButton);
 
-    expect(
-      screen.getByText(/Requester email is required./),
-    ).toBeInTheDocument();
+    await screen.findByText(/Requester email is required./);
     expect(
       screen.getByText(/Professor email is required./),
     ).toBeInTheDocument();
