@@ -11,10 +11,6 @@ import RestaurantIndexPage from "main/pages/Restaurants/RestaurantIndexPage";
 import RestaurantCreatePage from "main/pages/Restaurants/RestaurantCreatePage";
 import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
-import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
-import HelpRequestsCreatePage from "main/pages/HelpRequests/HelpRequestsCreatePage";
-import HelpRequestsEditPage from "main/pages/HelpRequests/HelpRequestsEditPage";
-
 import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
@@ -38,6 +34,10 @@ import UCSBMenuItemReviewEditPage from "main/pages/UCSBMenuItemReview/UCSBMenuIt
 import RecommendationRequestIndexPage from "main/pages/RecommendationRequest/RecommendationRequestIndexPage";
 import RecommendationRequestCreatePage from "main/pages/RecommendationRequest/RecommendationRequestCreatePage";
 import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
+
+import HelpRequestsIndexPage from "main/pages/HelpRequests/HelpRequestsIndexPage";
+import HelpRequestsCreatePage from "main/pages/HelpRequests/HelpRequestsCreatePage";
+import HelpRequestsEditPage from "main/pages/HelpRequests/HelpRequestsEditPage";
 
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
@@ -120,10 +120,8 @@ function App() {
           <>
             <Route
               exact
-              Fahim-HelpRequest-Pages
-              path="/helpRequests"
-              element={<HelpRequestsIndexPage />}
-              main
+              path="/ucsborganizations"
+              element={<UCSBOrganizationsIndexPage />}
             />
           </>
         )}
@@ -131,14 +129,13 @@ function App() {
           <>
             <Route
               exact
-              Fahim-HelpRequest-Pages
-              path="/helpRequests/edit/:id"
-              element={<HelpRequestsEditPage />}
+              path="/ucsborganizations/edit/:id"
+              element={<UCSBOrganizationsEditPage />}
             />
             <Route
               exact
-              path="/helpRequests/create"
-              element={<HelpRequestsCreatePage />}
+              path="/ucsborganizations/create"
+              element={<UCSBOrganizationsCreatePage />}
             />
           </>
         )}
@@ -231,6 +228,29 @@ function App() {
               exact
               path="/recommendationrequest/create"
               element={<RecommendationRequestCreatePage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_USER") && (
+          <>
+            <Route
+              exact
+              path="/helpRequests"
+              element={<HelpRequestsIndexPage />}
+            />
+          </>
+        )}
+        {hasRole(currentUser, "ROLE_ADMIN") && (
+          <>
+            <Route
+              exact
+              path="/helpRequests/edit/:id"
+              element={<HelpRequestsEditPage />}
+            />
+            <Route
+              exact
+              path="/helpRequests/create"
+              element={<HelpRequestsCreatePage />}
             />
           </>
         )}
