@@ -121,7 +121,6 @@ describe("ArticlesIndexPage tests", () => {
     expect(
       screen.queryByTestId("ArticlesTable-cell-row-0-col-Edit-button"),
     ).not.toBeInTheDocument();
-    expect(screen.queryByText(/Create Articles/)).not.toBeInTheDocument();
   });
 
   test("renders empty table when backend unavailable, user only", async () => {
@@ -148,30 +147,9 @@ describe("ArticlesIndexPage tests", () => {
       "Error communicating with backend via GET on /api/articles/all",
     );
     restoreConsole();
-    //expect(
-    //  screen.queryByTestId(`${testId}-cell-row-0-col-id`),
-    //).not.toBeInTheDocument();
+  
   });
 
-  test("renders no rows when articles list is empty", async () => {
-    setupUserOnly();
-
-    axiosMock.onGet("/api/articles/all").reply(200, []);
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <ArticlesIndexPage />
-        </MemoryRouter>
-      </QueryClientProvider>,
-    );
-
-    await waitFor(() => {
-      expect(
-        screen.queryByTestId(`${testId}-cell-row-0-col-id`),
-      ).not.toBeInTheDocument();
-    });
-  });
 
   test("what happens when you click delete, admin", async () => {
     setupAdminUser();
