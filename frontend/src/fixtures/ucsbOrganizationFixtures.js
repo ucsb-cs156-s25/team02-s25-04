@@ -1,4 +1,4 @@
-const restaurantFixtures = {
+const ucsbOrganizationFixtures = {
   oneUcsbOrganization: [
     {
       orgCode: "ZPR",
@@ -25,9 +25,9 @@ const restaurantFixtures = {
       orgCode: "OSLI",
       orgTranslationShort: "STUDENT LIFE",
       orgTranslation: "OFFICE OF STUDENT LIFE",
-      inactive: false,
+      inactive: true,
     },
   ],
 };
 
-export { restaurantFixtures };
+export { ucsbOrganizationFixtures };
