@@ -101,10 +101,14 @@ describe("ArticlesIndexPage tests", () => {
     const title = screen.getByText("FZ - Copied files from team01 for Backend");
     expect(title).toBeInTheDocument();
 
-    const url = screen.getByText("https://github.com/ucsb-cs156-s25/team02-s25-04/commit/090e4183ffa92de16915b01db3ea787ed239f1f1");
+    const url = screen.getByText(
+      "https://github.com/ucsb-cs156-s25/team02-s25-04/commit/090e4183ffa92de16915b01db3ea787ed239f1f1",
+    );
     expect(url).toBeInTheDocument();
 
-    const explanation = screen.getByText("Copied files from team01 for Backend");
+    const explanation = screen.getByText(
+      "Copied files from team01 for Backend",
+    );
     expect(explanation).toBeInTheDocument();
 
     const email = screen.getByText("fahimzaman@ucsb.edu");
