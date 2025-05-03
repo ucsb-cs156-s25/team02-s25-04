@@ -17,8 +17,29 @@ function RecommendationRequestForm({
 
   const navigate = useNavigate();
 
+  // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
+  // Note that even this complex regex may still need some tweaks
+
+  // Stryker disable Regex
+  const isodate_regex =
+    /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+  // Stryker disable StringLiteral
+  const DATE_FORMAT_ERROR = "Date requested must be in ISO format.";
+  // Stryker restore StringLiteral
+  // Stryker disable ObjectLiteral
+  const DATE_PATTERN = {
+    value: isodate_regex,
+    message: DATE_FORMAT_ERROR,
+  };
+  // Stryker restore ObjectLiteral
+  // Stryker restore Regex
+
+  const onSubmit = (data) => {
+    submitAction(data);
+  };
+
   return (
-    <Form onSubmit={handleSubmit(submitAction)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Row>
         {initialContents && (
           <Col>
@@ -89,6 +110,29 @@ function RecommendationRequestForm({
             />
             <Form.Control.Feedback type="invalid">
               {errors.explanation?.message}
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Form.Group className="mb-3">
+            <Form.Label htmlFor="dateRequested">
+              Date Requested (iso format)
+            </Form.Label>
+            <Form.Control
+              data-testid="RecommendationRequestForm-dateRequested"
+              id="dateRequested"
+              type="datetime-local"
+              isInvalid={Boolean(errors.dateRequested)}
+              {...register("dateRequested", {
+                required: "Date requested is required.",
+                pattern: DATE_PATTERN,
+              })}
+            />
+            <Form.Control.Feedback type="invalid">
+              {errors.dateRequested?.message}
             </Form.Control.Feedback>
           </Form.Group>
         </Col>
