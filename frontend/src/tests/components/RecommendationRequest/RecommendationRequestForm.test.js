@@ -22,7 +22,7 @@ describe("RecommendationRequestForm tests", () => {
     render(
       <Router>
         <RecommendationRequestForm submitAction={onSubmit} />
-      </Router>
+      </Router>,
     );
   };
 
@@ -37,45 +37,18 @@ describe("RecommendationRequestForm tests", () => {
         <RecommendationRequestForm
           initialContents={recommendationRequestFixtures.oneRequest}
         />
-      </Router>
+      </Router>,
     );
     expect(screen.getByTestId("RecommendationRequestForm-id")).toHaveValue("1");
     expect(
-      screen.getByTestId("RecommendationRequestForm-requesterEmail")
+      screen.getByTestId("RecommendationRequestForm-requesterEmail"),
     ).toHaveValue("test@test.com");
     expect(
-      screen.getByTestId("RecommendationRequestForm-professorEmail")
+      screen.getByTestId("RecommendationRequestForm-professorEmail"),
     ).toHaveValue("test@test.com");
     expect(
-      screen.getByTestId("RecommendationRequestForm-explanation")
+      screen.getByTestId("RecommendationRequestForm-explanation"),
     ).toHaveValue("Test explanation");
-  });
-
-  test("renders correctly when passing in a RecommendationRequest", () => {
-    render(
-      <Router>
-        <RecommendationRequestForm
-          initialContents={{
-            id: "1",
-            requesterEmail: "student@ucsb.edu",
-            professorEmail: "professor@ucsb.edu",
-            explanation: "I need a recommendation for grad school",
-          }}
-          submitAction={onSubmit}
-        />
-      </Router>
-    );
-
-    expect(screen.getByTestId("RecommendationRequestForm-id")).toHaveValue("1");
-    expect(
-      screen.getByTestId("RecommendationRequestForm-requesterEmail")
-    ).toHaveValue("student@ucsb.edu");
-    expect(
-      screen.getByTestId("RecommendationRequestForm-professorEmail")
-    ).toHaveValue("professor@ucsb.edu");
-    expect(
-      screen.getByTestId("RecommendationRequestForm-explanation")
-    ).toHaveValue("I need a recommendation for grad school");
   });
 
   test("Shows error messages on missing input", async () => {
@@ -83,30 +56,26 @@ describe("RecommendationRequestForm tests", () => {
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
     fireEvent.click(submitButton);
 
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Requester email is required./)
-      ).toBeInTheDocument();
-      expect(
-        screen.getByText(/Professor email is required./)
-      ).toBeInTheDocument();
-      expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
-    });
+    expect(
+      screen.getByText(/Requester email is required./),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/Professor email is required./),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
   });
 
   test("No error messages on good input", async () => {
     renderForm();
     const requesterEmailInput = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail"
+      "RecommendationRequestForm-requesterEmail",
     );
     const professorEmailInput = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail"
+      "RecommendationRequestForm-professorEmail",
     );
     const explanationInput = screen.getByTestId(
-      "RecommendationRequestForm-explanation"
+      "RecommendationRequestForm-explanation",
     );
-    const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
-
     fireEvent.change(requesterEmailInput, {
       target: { value: "student@ucsb.edu" },
     });
