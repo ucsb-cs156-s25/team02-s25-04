@@ -114,7 +114,7 @@ describe("ArticlesIndexPage tests", () => {
     const email = screen.getByText("fahimzaman@ucsb.edu");
     expect(email).toBeInTheDocument();
 
-    const dateAdded = screen.getByText("2025-04-29T05:35:00");
+    const dateAdded = screen.getByText("2025-04-29T08:45:00");
     expect(dateAdded).toBeInTheDocument();
 
     // for non-admin users, details button is visible, but the edit and delete buttons should not be visible
