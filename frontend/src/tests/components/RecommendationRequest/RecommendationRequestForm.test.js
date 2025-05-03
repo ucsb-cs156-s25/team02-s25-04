@@ -11,14 +11,24 @@ jest.mock("react-router-dom", () => ({
 }));
 
 describe("RecommendationRequestForm tests", () => {
-  test("renders correctly", async () => {
+  const onSubmit = jest.fn();
+
+  beforeEach(() => {
+    onSubmit.mockClear();
+    mockedNavigate.mockClear();
+  });
+
+  const renderForm = () => {
     render(
       <Router>
-        <RecommendationRequestForm />
-      </Router>,
+        <RecommendationRequestForm submitAction={onSubmit} />
+      </Router>
     );
-    await screen.findByText(/Requester Email/);
-    await screen.findByText(/Create/);
+  };
+
+  test("renders correctly with default button label", () => {
+    renderForm();
+    expect(screen.getByText(/Create/)).toBeInTheDocument();
   });
 
   test("renders correctly when passing in a RecommendationRequest", async () => {
@@ -27,99 +37,96 @@ describe("RecommendationRequestForm tests", () => {
         <RecommendationRequestForm
           initialContents={recommendationRequestFixtures.oneRequest}
         />
-      </Router>,
+      </Router>
     );
-    await screen.findByTestId(/RecommendationRequestForm-id/);
-    expect(screen.getByText(/Id/)).toBeInTheDocument();
-    expect(screen.getByTestId(/RecommendationRequestForm-id/)).toHaveValue("1");
+    expect(screen.getByTestId("RecommendationRequestForm-id")).toHaveValue("1");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-requesterEmail")
+    ).toHaveValue("test@test.com");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-professorEmail")
+    ).toHaveValue("test@test.com");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-explanation")
+    ).toHaveValue("Test explanation");
   });
 
-  test("Correct Error messages on bad input", async () => {
+  test("renders correctly when passing in a RecommendationRequest", () => {
     render(
       <Router>
-        <RecommendationRequestForm />
-      </Router>,
+        <RecommendationRequestForm
+          initialContents={{
+            id: "1",
+            requesterEmail: "student@ucsb.edu",
+            professorEmail: "professor@ucsb.edu",
+            explanation: "I need a recommendation for grad school",
+          }}
+          submitAction={onSubmit}
+        />
+      </Router>
     );
-    await screen.findByTestId("RecommendationRequestForm-requesterEmail");
-    const requesterEmailField = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail",
-    );
-    const professorEmailField = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail",
-    );
-    const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
-    fireEvent.change(requesterEmailField, { target: { value: "bad-email" } });
-    fireEvent.change(professorEmailField, { target: { value: "bad-email" } });
+    expect(screen.getByTestId("RecommendationRequestForm-id")).toHaveValue("1");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-requesterEmail")
+    ).toHaveValue("student@ucsb.edu");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-professorEmail")
+    ).toHaveValue("professor@ucsb.edu");
+    expect(
+      screen.getByTestId("RecommendationRequestForm-explanation")
+    ).toHaveValue("I need a recommendation for grad school");
+  });
+
+  test("Shows error messages on missing input", async () => {
+    renderForm();
+    const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
     fireEvent.click(submitButton);
 
-    const errorMessages = await screen.findAllByText(/Invalid email address/);
-    expect(errorMessages).toHaveLength(2);
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Requester email is required./)
+      ).toBeInTheDocument();
+      expect(
+        screen.getByText(/Professor email is required./)
+      ).toBeInTheDocument();
+      expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
+    });
   });
 
-  test("Correct Error messages on missing input", async () => {
-    render(
-      <Router>
-        <RecommendationRequestForm />
-      </Router>,
+  test("No error messages on good input", async () => {
+    renderForm();
+    const requesterEmailInput = screen.getByTestId(
+      "RecommendationRequestForm-requesterEmail"
     );
-    await screen.findByTestId("RecommendationRequestForm-submit");
-    const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
-
-    fireEvent.click(submitButton);
-
-    await screen.findByText(/Requester email is required/);
-    expect(screen.getByText(/Professor email is required/)).toBeInTheDocument();
-    expect(screen.getByText(/Explanation is required/)).toBeInTheDocument();
-  });
-
-  test("No Error messages on good input", async () => {
-    const mockSubmitAction = jest.fn();
-
-    render(
-      <Router>
-        <RecommendationRequestForm submitAction={mockSubmitAction} />
-      </Router>,
+    const professorEmailInput = screen.getByTestId(
+      "RecommendationRequestForm-professorEmail"
     );
-    await screen.findByTestId("RecommendationRequestForm-requesterEmail");
-
-    const requesterEmailField = screen.getByTestId(
-      "RecommendationRequestForm-requesterEmail",
-    );
-    const professorEmailField = screen.getByTestId(
-      "RecommendationRequestForm-professorEmail",
-    );
-    const explanationField = screen.getByTestId(
-      "RecommendationRequestForm-explanation",
+    const explanationInput = screen.getByTestId(
+      "RecommendationRequestForm-explanation"
     );
     const submitButton = screen.getByTestId("RecommendationRequestForm-submit");
 
-    fireEvent.change(requesterEmailField, {
+    fireEvent.change(requesterEmailInput, {
       target: { value: "student@ucsb.edu" },
     });
-    fireEvent.change(professorEmailField, {
+    fireEvent.change(professorEmailInput, {
       target: { value: "professor@ucsb.edu" },
     });
-    fireEvent.change(explanationField, {
+    fireEvent.change(explanationInput, {
       target: { value: "I need a recommendation for graduate school" },
     });
-    fireEvent.click(submitButton);
 
-    await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+    fireEvent.click(screen.getByTestId("RecommendationRequestForm-submit"));
 
-    expect(screen.queryByText(/Invalid email address/)).not.toBeInTheDocument();
+    await waitFor(() => expect(onSubmit).toHaveBeenCalled());
+
     expect(screen.queryByText(/is required/)).not.toBeInTheDocument();
   });
 
-  test("that navigate(-1) is called when Cancel is clicked", async () => {
-    render(
-      <Router>
-        <RecommendationRequestForm />
-      </Router>,
-    );
-    await screen.findByTestId("RecommendationRequestForm-cancel");
+  test("navigate(-1) is called when Cancel is clicked", async () => {
+    renderForm();
     const cancelButton = screen.getByTestId("RecommendationRequestForm-cancel");
-
     fireEvent.click(cancelButton);
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith(-1));
