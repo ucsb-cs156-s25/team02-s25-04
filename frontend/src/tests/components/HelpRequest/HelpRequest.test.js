@@ -22,7 +22,7 @@ describe("HelpRequestForm tests", () => {
     "Table/Breakout Room #",
     "Request Time (in UTC)",
     "Explanation",
-    "Is it Solved?",
+    "Has it been solved?",
   ];
   const testId = "HelpRequestForm";
 
