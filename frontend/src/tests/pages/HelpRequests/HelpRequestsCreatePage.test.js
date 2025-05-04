@@ -88,7 +88,7 @@ describe("HelpRequestCreatePage tests", () => {
       expect(screen.getByLabelText("Email")).toBeInTheDocument();
     });
 
-    const requestInput = screen.getByLabelText("Email");
+    const requesterEmailInput = screen.getByLabelText("Email");
     expect(nameInput).toBeInTheDocument();
 
     const teamIdInput = screen.getByLabelText("Team ID");
