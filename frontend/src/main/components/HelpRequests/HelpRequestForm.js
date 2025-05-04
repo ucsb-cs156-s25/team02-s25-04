@@ -120,7 +120,7 @@ function HelpRequestForm({
         </Col>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="requestTime">Request Time (in UTC)</Form.Label>
+            <Form.Label htmlFor="requestTime">Request Time </Form.Label>
             <Form.Control
               id="requestTime"
               type="datetime-local"
@@ -128,6 +128,13 @@ function HelpRequestForm({
               {...register("requestTime", {
                 required: true,
                 pattern: isodate_regex,
+                setValueAs: (value) => {
+                  // Append 'Z' if it doesn't already have one
+                  if (value && !value.endsWith("Z")) {
+                    return value + "Z";
+                  }
+                  return value;
+                },
               })}
             />
             <Form.Control.Feedback type="invalid">
