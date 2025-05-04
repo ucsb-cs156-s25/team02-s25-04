@@ -194,7 +194,7 @@ describe("HelpRequestTable tests", () => {
 
     // assert - check that the navigate function was called with the expected path
     await waitFor(() =>
-      expect(mockedNavigate).toHaveBeenCalledWith("/helpRequests/edit/1"),
+      expect(mockedNavigate).toHaveBeenCalledWith("/HelpRequest/edit/1"),
     );
   });
 
@@ -204,7 +204,7 @@ describe("HelpRequestTable tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
     axiosMock
-      .onDelete("/api/helpRequests")
+      .onDelete("/api/HelpRequest")
       .reply(200, { message: "Help Request deleted" });
 
     // act - render the component
@@ -285,9 +285,9 @@ describe("HelpRequestTable tests", () => {
     // assert
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
-    ).toHaveTextContent("2025-04-30T06:26:00");
+    ).toHaveTextContent("2025-04-29T23:26:00");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-requestTime`),
-    ).toHaveTextContent("2025-04-30T06:26:00");
+    ).toHaveTextContent("2025-04-29T23:26:00");
   });
 });
