@@ -1,19 +1,17 @@
 import React from "react";
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
 import { http, HttpResponse } from "msw";
 
-import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
-
-import { articlesFixtures } from "fixtures/articlesFixtures";
-
+import RecommendationRequestEditPage from "main/pages/RecommendationRequest/RecommendationRequestEditPage";
 
 export default {
-  title: "pages/Articles/ArticlesEditPage",
-  component: ArticlesEditPage,
+  title: "pages/RecommendationRequest/RecommendationRequestEditPage",
+  component: RecommendationRequestEditPage,
 };
 
-const Template = () => <ArticlesEditPage storybook={true} />;
+const Template = () => <RecommendationRequestEditPage storybook={true} />;
 
 export const Default = Template.bind({});
 Default.parameters = {
@@ -28,18 +26,12 @@ Default.parameters = {
         status: 200,
       });
     }),
-    http.get("/api/articles", () => {
-
-      return HttpResponse.json(articlesFixtures.threeArticles[0], {
-
+    http.get("/api/recommendationrequests", () => {
+      return HttpResponse.json(recommendationRequestFixtures.threeRequests[0], {
         status: 200,
       });
     }),
-    http.put("/api/articles", () => {
-      return HttpResponse.json({}, { status: 200 });
-    }),
-    http.put("/api/articles", (req) => {
-      window.alert("PUT: " + req.url + " and body: " + req.body);
+    http.put("/api/recommendationrequests", () => {
       return HttpResponse.json({}, { status: 200 });
     }),
   ],
