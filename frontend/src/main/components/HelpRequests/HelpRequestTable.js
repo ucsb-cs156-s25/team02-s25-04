@@ -53,14 +53,8 @@ export default function HelpRequestTable({
       accessor: "tableOrBreakoutRoom",
     },
     {
-      Header: "Request Time (in UTC)",
+      Header: "Request Time",
       accessor: "requestTime",
-      Cell: ({ value }) => {
-        const date = new Date(value);
-        return isNaN(date.getTime())
-          ? value
-          : date.toISOString().replace(".000", "");
-      },
     },
     {
       Header: "Explanation",

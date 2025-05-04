@@ -120,7 +120,7 @@ function HelpRequestForm({
         </Col>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="requestTime">Request Time </Form.Label>
+            <Form.Label htmlFor="requestTime">Request Time</Form.Label>
             <Form.Control
               id="requestTime"
               type="datetime-local"

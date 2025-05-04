@@ -22,7 +22,7 @@ describe("HelpRequestTable tests", () => {
     "Email",
     "Team ID",
     "Table/Breakout Room #",
-    "Request Time (in UTC)",
+    "Request Time",
     "Explanation",
     "Has it been solved?",
   ];
@@ -285,9 +285,9 @@ describe("HelpRequestTable tests", () => {
     // assert
     expect(
       screen.getByTestId(`${testId}-cell-row-0-col-requestTime`),
-    ).toHaveTextContent("2025-04-30T06:26:00Z");
+    ).toHaveTextContent("2025-04-30T06:26:00");
     expect(
       screen.getByTestId(`${testId}-cell-row-1-col-requestTime`),
-    ).toHaveTextContent("2025-04-30T06:26:00Z");
+    ).toHaveTextContent("2025-04-30T06:26:00");
   });
 });
