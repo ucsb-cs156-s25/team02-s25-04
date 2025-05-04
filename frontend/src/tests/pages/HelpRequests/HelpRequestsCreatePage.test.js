@@ -89,7 +89,7 @@ describe("HelpRequestCreatePage tests", () => {
     });
 
     const requesterEmailInput = screen.getByLabelText("Email");
-    expect(nameInput).toBeInTheDocument();
+    expect(requesterEmailInput).toBeInTheDocument();
 
     const teamIdInput = screen.getByLabelText("Team ID");
     expect(teamIdInput).toBeInTheDocument();
