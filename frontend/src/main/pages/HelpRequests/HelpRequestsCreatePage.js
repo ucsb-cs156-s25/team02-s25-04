@@ -50,4 +50,3 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
     </BasicLayout>
   );
 }
-

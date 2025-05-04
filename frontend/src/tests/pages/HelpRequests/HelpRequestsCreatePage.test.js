@@ -94,7 +94,9 @@ describe("HelpRequestCreatePage tests", () => {
     const teamIdInput = screen.getByLabelText("Team ID");
     expect(teamIdInput).toBeInTheDocument();
 
-    const tableOrBreakoutRoomInput = screen.getByLabelText("Table/Breakout Room #");
+    const tableOrBreakoutRoomInput = screen.getByLabelText(
+      "Table/Breakout Room #",
+    );
     expect(tableOrBreakoutRoomInput).toBeInTheDocument();
 
     const requestTimeInput = screen.getByLabelText("Request Time");
@@ -109,7 +111,9 @@ describe("HelpRequestCreatePage tests", () => {
     const createButton = screen.getByText("Create");
     expect(createButton).toBeInTheDocument();
 
-    fireEvent.change(requesterEmailInput, { target: { value: "fahimzaman@ucsb.edu" } });
+    fireEvent.change(requesterEmailInput, {
+      target: { value: "fahimzaman@ucsb.edu" },
+    });
     fireEvent.change(teamIdInput, {
       target: { value: "s25-6pm-4" },
     });
@@ -145,4 +149,3 @@ describe("HelpRequestCreatePage tests", () => {
     expect(mockNavigate).toBeCalledWith({ to: "/HelpRequest" });
   });
 });
-
