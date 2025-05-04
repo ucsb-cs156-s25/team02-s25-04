@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/11</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/11</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.72% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/11</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -248,13 +248,8 @@
 <a name='L183'></a><a href='#L183'>183</a>
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L186'></a><a href='#L186'>186</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -264,8 +259,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -285,22 +278,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">8x</span>
@@ -454,12 +442,11 @@ function HelpRequestForm({
   submitAction,
   buttonLabel = "Create",
 }) {
+  // Stryker disable all
   const defaultValues = initialContents
     ? {
         ...initialContents,
-        requestTime: initialContents?.requestTime
-          ? new Date(initialContents?.requestTime).toISOString().replace("Z", "")
-          : <span class="branch-1 cbranch-no" title="branch not covered" >"",</span>
+        requestTime: initialContents?.requestTime.replace("Z", ""),
       }
     : {
         requesterEmail: "",
@@ -475,6 +462,7 @@ function HelpRequestForm({
     formState: { errors },
     handleSubmit,
   } = useForm({ defaultValues });
+  // Stryker restore all
 &nbsp;
   const navigate = useNavigate();
 &nbsp;
@@ -483,19 +471,13 @@ function HelpRequestForm({
   // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
   // Note that even this complex regex may still need some tweaks
 &nbsp;
+  // Stryker disable Regex
   const isodate_regex =
     /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-&nbsp;
-&nbsp;
-  const onSubmit = <span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
-<span class="cstat-no" title="statement not covered" >    if (data.requestTime) {</span>
-<span class="cstat-no" title="statement not covered" >      data.requestTime = new Date(data.requestTime).toISOString(); </span>
-    }
-<span class="cstat-no" title="statement not covered" >    submitAction(data); </span>
-  };
+  // Stryker restore Regex
 &nbsp;
   return (
-    &lt;Form onSubmit={handleSubmit(onSubmit)}&gt;
+    &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
       &lt;Row&gt;
         {initialContents &amp;&amp; (
           &lt;Col&gt;
@@ -573,7 +555,7 @@ function HelpRequestForm({
         &lt;/Col&gt;
         &lt;Col&gt;
           &lt;Form.Group className="mb-3"&gt;
-            &lt;Form.Label htmlFor="requestTime"&gt;Request Time&lt;/Form.Label&gt;
+            &lt;Form.Label htmlFor="requestTime"&gt;Request Time (in UTC)&lt;/Form.Label&gt;
             &lt;Form.Control
               id="requestTime"
               type="datetime-local"
@@ -643,7 +625,7 @@ export default HelpRequestForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-04T01:01:49.386Z
+                at 2025-05-04T01:02:02.096Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
