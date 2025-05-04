@@ -69,9 +69,9 @@ describe("HelpRequestCreatePage tests", () => {
       requesterEmail: "fahimzaman@ucsb.edu",
       teamId: "s25-6pm-4",
       tableOrBreakoutRoom: "4",
-      requestTime: "2025-04-29T23:29:00",
+      requestTime: "2025-04-29T23:29",
       explanation: "I can't figure out how to delete a help request post",
-      solved: true,
+      solved: false,
     };
 
     axiosMock.onPost("/api/HelpRequest/post").reply(202, helpRequest);
@@ -105,7 +105,7 @@ describe("HelpRequestCreatePage tests", () => {
     const explanationInput = screen.getByLabelText("Explanation");
     expect(explanationInput).toBeInTheDocument();
 
-    const solvedInput = screen.getByLabelText("Solved");
+    const solvedInput = screen.getByLabelText("Has it been solved?");
     expect(solvedInput).toBeInTheDocument();
 
     const createButton = screen.getByText("Create");
@@ -121,13 +121,13 @@ describe("HelpRequestCreatePage tests", () => {
       target: { value: "4" },
     });
     fireEvent.change(requestTimeInput, {
-      target: { value: "2025-04-29T23:29:00" },
+      target: { value: "2025-04-29T23:29" },
     });
     fireEvent.change(explanationInput, {
       target: { value: "I can't figure out how to delete a help request post" },
     });
     fireEvent.change(solvedInput, {
-      target: { value: true },
+      target: { value: false },
     });
     fireEvent.click(createButton);
 
@@ -137,9 +137,9 @@ describe("HelpRequestCreatePage tests", () => {
       requesterEmail: "fahimzaman@ucsb.edu",
       teamId: "s25-6pm-4",
       tableOrBreakoutRoom: "4",
-      requestTime: "2025-04-29T23:29:00",
+      requestTime: "2025-04-29T23:29",
       explanation: "I can't figure out how to delete a help request post",
-      solved: true,
+      solved: false,
     });
 
     // assert - check that the toast was called with the expected message
