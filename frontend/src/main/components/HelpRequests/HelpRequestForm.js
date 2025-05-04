@@ -126,15 +126,8 @@ function HelpRequestForm({
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
               {...register("requestTime", {
-                required: true,
+                required: "Request Time is required.",
                 pattern: isodate_regex,
-                setValueAs: (value) => {
-                  // Append 'Z' if it doesn't already have one
-                  if (value && !value.endsWith("Z")) {
-                    return value + "Z";
-                  }
-                  return value;
-                },
               })}
             />
             <Form.Control.Feedback type="invalid">
