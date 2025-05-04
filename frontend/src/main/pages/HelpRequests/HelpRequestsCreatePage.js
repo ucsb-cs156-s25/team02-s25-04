@@ -5,6 +5,7 @@ import { useBackendMutation } from "main/utils/useBackend";
 import { toast } from "react-toastify";
 
 export default function HelpRequestsCreatePage({ storybook = false }) {
+  const addZ = (string) => `${string}Z`;
   const objectToAxiosParams = (helpRequest) => ({
     url: "/api/HelpRequest/post",
     method: "POST",
@@ -12,7 +13,7 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
       requesterEmail: helpRequest.requesterEmail,
       teamId: helpRequest.teamId,
       tableOrBreakoutRoom: helpRequest.tableOrBreakoutRoom,
-      requestTime: helpRequest.requestTime,
+      requestTime: addZ(helpRequest.requestTime),
       explanation: helpRequest.explanation,
       solved: helpRequest.solved,
     },
@@ -20,7 +21,7 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
 
   const onSuccess = (helpRequest) => {
     toast(
-      `New Help Request Created - id: ${helpRequest.teamId} explanation ${helpRequest.explanation}`,
+      `New Help Request Created - id: ${helpRequest.id} explanation: ${helpRequest.explanation}`,
     );
   };
 
@@ -28,7 +29,7 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
     objectToAxiosParams,
     { onSuccess },
     // Stryker disable next-line all : hard to set up test for caching
-    ["/api/HelpRequest/all"] // mutation makes this key stale so that pages relying on it reload
+    ["/api/HelpRequest/all"], // mutation makes this key stale so that pages relying on it reload
   );
 
   const { isSuccess } = mutation;
@@ -38,7 +39,7 @@ export default function HelpRequestsCreatePage({ storybook = false }) {
   };
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/helpRequests" />;
+    return <Navigate to="/HelpRequest" />;
   }
 
   return (
