@@ -120,13 +120,13 @@ function HelpRequestForm({
         </Col>
         <Col>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="requestTime">Request Time (in UTC)</Form.Label>
+            <Form.Label htmlFor="requestTime">Request Time</Form.Label>
             <Form.Control
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
               {...register("requestTime", {
-                required: true,
+                required: "Request Time is required.",
                 pattern: isodate_regex,
               })}
             />

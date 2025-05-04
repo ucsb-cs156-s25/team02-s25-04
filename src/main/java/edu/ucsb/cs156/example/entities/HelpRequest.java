@@ -1,7 +1,6 @@
 package edu.ucsb.cs156.example.entities;
 
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +26,7 @@ public class HelpRequest{
   @Column(name = "TEAMID")
   private String teamId;
   private String tableOrBreakoutRoom;
-  private ZonedDateTime requestTime;
+  private LocalDateTime requestTime;
   private String explanation;
   private boolean solved;
 }
