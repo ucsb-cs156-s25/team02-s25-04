@@ -60,11 +60,11 @@ describe("HelpRequestsEditPage tests", () => {
           <MemoryRouter>
             <HelpRequestsEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
       await screen.findByText("Edit Help Request");
       expect(
-        screen.queryByTestId("HelpRequest-requesterEmail")
+        screen.queryByTestId("HelpRequest-requesterEmail"),
       ).not.toBeInTheDocument();
       restoreConsole();
     });
@@ -110,24 +110,24 @@ describe("HelpRequestsEditPage tests", () => {
           <MemoryRouter>
             <HelpRequestsEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByTestId("HelpRequestForm-requesterEmail");
 
       const idField = screen.getByTestId("HelpRequestForm-id");
       const requesterEmailField = screen.getByTestId(
-        "HelpRequestForm-requesterEmail"
+        "HelpRequestForm-requesterEmail",
       );
       const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
       const tableOrBreakoutRoomField = screen.getByTestId(
-        "HelpRequestForm-tableOrBreakoutRoom"
+        "HelpRequestForm-tableOrBreakoutRoom",
       );
       const requestTimeField = screen.getByTestId(
-        "HelpRequestForm-requestTime"
+        "HelpRequestForm-requestTime",
       );
       const explanationField = screen.getByTestId(
-        "HelpRequestForm-explanation"
+        "HelpRequestForm-explanation",
       );
       const solvedField = screen.getByTestId("HelpRequestForm-solved");
 
@@ -169,7 +169,7 @@ describe("HelpRequestsEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Help Request Updated - id: 17 explanation: I need help with my project."
+        "Help Request Updated - id: 17 explanation: I need help with my project.",
       );
 
       expect(mockNavigate).toBeCalledWith({ to: "/HelpRequest" });
@@ -184,7 +184,7 @@ describe("HelpRequestsEditPage tests", () => {
           requestTime: "2023-10-01T12:32",
           explanation: "I need help with my project.",
           solved: true,
-        })
+        }),
       ); // posted object
     });
 
@@ -194,24 +194,24 @@ describe("HelpRequestsEditPage tests", () => {
           <MemoryRouter>
             <HelpRequestsEditPage />
           </MemoryRouter>
-        </QueryClientProvider>
+        </QueryClientProvider>,
       );
 
       await screen.findByTestId("HelpRequestForm-requesterEmail");
 
       const idField = screen.getByTestId("HelpRequestForm-id");
       const requesterEmailField = screen.getByTestId(
-        "HelpRequestForm-requesterEmail"
+        "HelpRequestForm-requesterEmail",
       );
       const teamIdField = screen.getByTestId("HelpRequestForm-teamId");
       const tableOrBreakoutRoomField = screen.getByTestId(
-        "HelpRequestForm-tableOrBreakoutRoom"
+        "HelpRequestForm-tableOrBreakoutRoom",
       );
       const requestTimeField = screen.getByTestId(
-        "HelpRequestForm-requestTime"
+        "HelpRequestForm-requestTime",
       );
       const explanationField = screen.getByTestId(
-        "HelpRequestForm-explanation"
+        "HelpRequestForm-explanation",
       );
       const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
@@ -239,7 +239,7 @@ describe("HelpRequestsEditPage tests", () => {
 
       await waitFor(() => expect(mockToast).toBeCalled());
       expect(mockToast).toBeCalledWith(
-        "Help Request Updated - id: 17 explanation: I need help with my project."
+        "Help Request Updated - id: 17 explanation: I need help with my project.",
       );
       expect(mockNavigate).toBeCalledWith({ to: "/HelpRequest" });
     });
