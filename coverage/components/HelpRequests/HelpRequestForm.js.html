@@ -248,7 +248,13 @@
 <a name='L183'></a><a href='#L183'>183</a>
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
-<a name='L186'></a><a href='#L186'>186</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L186'></a><a href='#L186'>186</a>
+<a name='L187'></a><a href='#L187'>187</a>
+<a name='L188'></a><a href='#L188'>188</a>
+<a name='L189'></a><a href='#L189'>189</a>
+<a name='L190'></a><a href='#L190'>190</a>
+<a name='L191'></a><a href='#L191'>191</a>
+<a name='L192'></a><a href='#L192'>192</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -258,7 +264,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -276,22 +282,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -521,6 +533,7 @@ function HelpRequestForm({
           &lt;Form.Group className="mb-3"&gt;
             &lt;Form.Label htmlFor="teamId"&gt;Team ID&lt;/Form.Label&gt;
             &lt;Form.Control
+              data-testid={testIdPrefix + "-teamId"}
               id="teamId"
               type="text"
               isInvalid={Boolean(errors.teamId)}
@@ -541,6 +554,7 @@ function HelpRequestForm({
               Table/Breakout Room #
             &lt;/Form.Label&gt;
             &lt;Form.Control
+              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
               id="tableOrBreakoutRoom"
               type="text"
               isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -557,6 +571,7 @@ function HelpRequestForm({
           &lt;Form.Group className="mb-3"&gt;
             &lt;Form.Label htmlFor="requestTime"&gt;Request Time&lt;/Form.Label&gt;
             &lt;Form.Control
+              data-testid={testIdPrefix + "-requestTime"}
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
@@ -595,6 +610,7 @@ function HelpRequestForm({
       &lt;Form.Group className="mb-3"&gt;
         &lt;Form.Label htmlFor="solved"&gt;Has it been solved?&lt;/Form.Label&gt;
         &lt;Form.Check
+          data-testid={testIdPrefix + "-solved"}
           id="solved"
           type="checkbox"
           isInvalid={Boolean(errors.solved)}
@@ -605,7 +621,9 @@ function HelpRequestForm({
         &lt;/Form.Control.Feedback&gt;
       &lt;/Form.Group&gt;
 &nbsp;
-      &lt;Button type="submit"&gt;{buttonLabel}&lt;/Button&gt;
+      &lt;Button type="submit" data-testid={testIdPrefix + "-submit"}&gt;
+        {buttonLabel}
+      &lt;/Button&gt;
       &lt;Button
         variant="Secondary"
         onClick={() =&gt; navigate(-1)}
@@ -625,7 +643,7 @@ export default HelpRequestForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-04T19:35:17.999Z
+                at 2025-05-04T19:36:05.530Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
