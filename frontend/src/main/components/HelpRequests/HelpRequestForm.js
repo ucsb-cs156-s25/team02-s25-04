@@ -86,6 +86,7 @@ function HelpRequestForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="teamId">Team ID</Form.Label>
             <Form.Control
+              data-testid={testIdPrefix + "-teamId"}
               id="teamId"
               type="text"
               isInvalid={Boolean(errors.teamId)}
@@ -106,6 +107,7 @@ function HelpRequestForm({
               Table/Breakout Room #
             </Form.Label>
             <Form.Control
+              data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
               id="tableOrBreakoutRoom"
               type="text"
               isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -122,6 +124,7 @@ function HelpRequestForm({
           <Form.Group className="mb-3">
             <Form.Label htmlFor="requestTime">Request Time</Form.Label>
             <Form.Control
+              data-testid={testIdPrefix + "-requestTime"}
               id="requestTime"
               type="datetime-local"
               isInvalid={Boolean(errors.requestTime)}
@@ -160,6 +163,7 @@ function HelpRequestForm({
       <Form.Group className="mb-3">
         <Form.Label htmlFor="solved">Has it been solved?</Form.Label>
         <Form.Check
+          data-testid={testIdPrefix + "-solved"}
           id="solved"
           type="checkbox"
           isInvalid={Boolean(errors.solved)}
@@ -170,7 +174,9 @@ function HelpRequestForm({
         </Form.Control.Feedback>
       </Form.Group>
 
-      <Button type="submit">{buttonLabel}</Button>
+      <Button type="submit" data-testid={testIdPrefix + "-submit"}>
+        {buttonLabel}
+      </Button>
       <Button
         variant="Secondary"
         onClick={() => navigate(-1)}
