@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cglib.core.Local;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -81,13 +82,13 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         public void logged_in_user_can_get_all_helprequest() throws Exception {
 
                 // arrange
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 HelpRequest helpRequest1 = HelpRequest.builder()
                                 .requesterEmail("fahimzaman@ucsb.edu")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("7")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("Test1")
                                 .solved(false)
                                 .build();
@@ -114,13 +115,13 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         public void an_admin_user_can_post_a_new_helprequest() throws Exception {
                 // arrange
 
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 HelpRequest helpRequest1 = HelpRequest.builder()
                                 .requesterEmail("fahimzaman@ucsb.edu")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("7")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("Test1")
                                 .solved(true)
                                 .build();
@@ -129,7 +130,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                post("/api/HelpRequest/post?requesterEmail=fahimzaman@ucsb.edu&teamId=s22-5pm-3&tableOrBreakoutRoom=7&requestTime=2022-01-03T00:00:00Z&explanation=Test1&solved=true")
+                                post("/api/HelpRequest/post?requesterEmail=fahimzaman@ucsb.edu&teamId=s22-5pm-3&tableOrBreakoutRoom=7&requestTime=2022-01-03T00:00:00&explanation=Test1&solved=true")
                                                 .with(csrf()))
                                 .andExpect(status().isOk()).andReturn();
 
@@ -151,13 +152,13 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         public void test_that_logged_in_user_can_get_by_id_when_the_id_exists() throws Exception {
 
                 // arrange
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 HelpRequest helpRequest2 = HelpRequest.builder()
                                 .requesterEmail("fahimzaman@ucsb.edu")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("7")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("Test2")
                                 .solved(true)
                                 .build();
@@ -201,14 +202,15 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         public void admin_can_edit_an_existing_helprequest() throws Exception {
                 // arrange
 
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2025-05-05T00:00:00Z");
-                ZonedDateTime zdt2 = ZonedDateTime.parse("2022-01-03T00:00:00Z");
+
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
+                LocalDateTime ldt2 = LocalDateTime.parse("2025-05-05T00:00:00");
 
                 HelpRequest helpRequestOrig = HelpRequest.builder()
                                 .requesterEmail("test3@ucsb.edu")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("3")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("Test3")
                                 .solved(false)
                                 .build();
@@ -217,7 +219,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                                 .requesterEmail("test4@ucsb.edu")
                                 .teamId("s22-5pm-4")
                                 .tableOrBreakoutRoom("4")
-                                .requestTime(zdt2)
+                                .requestTime(ldt2)
                                 .explanation("Test4")
                                 .solved(true)
                                 .build();
@@ -247,13 +249,13 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         public void admin_cannot_edit_helprequest_that_does_not_exist() throws Exception {
                 // arrange
 
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2025-05-05T00:00:00Z");
+                LocalDateTime ldt1 = LocalDateTime.parse("2022-01-03T00:00:00");
 
                 HelpRequest helpRequestEdited = HelpRequest.builder()
                                 .requesterEmail("testEdit")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("3")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("TestEdit")
                                 .solved(true)
                                 .build();
@@ -282,13 +284,13 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         @Test
         public void admin_can_delete_a_helprequest() throws Exception {
                 // arrange
-                ZonedDateTime zdt1 = ZonedDateTime.parse("2025-05-05T00:00:00Z");
+                LocalDateTime ldt1 = LocalDateTime.parse("2025-05-05T00:00:00");
 
                 HelpRequest helpRequest4 = HelpRequest.builder()
                                 .requesterEmail("test4")
                                 .teamId("s22-5pm-3")
                                 .tableOrBreakoutRoom("3")
-                                .requestTime(zdt1)
+                                .requestTime(ldt1)
                                 .explanation("Test4")
                                 .solved(true)
                                 .build();
