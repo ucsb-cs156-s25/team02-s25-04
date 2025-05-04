@@ -7,7 +7,6 @@ import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
 
 import { articlesFixtures } from "fixtures/articlesFixtures";
 
-
 export default {
   title: "pages/Articles/ArticlesEditPage",
   component: ArticlesEditPage,
@@ -29,9 +28,7 @@ Default.parameters = {
       });
     }),
     http.get("/api/articles", () => {
-
       return HttpResponse.json(articlesFixtures.threeArticles[0], {
-
         status: 200,
       });
     }),
