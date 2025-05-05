@@ -40,7 +40,7 @@ import java.util.Optional;
  * This is a REST controller for Articles
  */
 
-@Tag(name = "articles")
+@Tag(name = "Articles")
 @RequestMapping("/api/articles")
 @RestController
 @Slf4j
